@@ -9,6 +9,7 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 
 ### To-Do List
 
+- [ ] Verilerin çekileceği public free api ler tespit edilecek
 - [ ] Logo oluşturulacak
 - [ ] Veritabanı tasarımı yapılacak
 - [ ] Android uygulama için mockup tasarımı yapılacak 
