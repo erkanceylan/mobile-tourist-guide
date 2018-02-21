@@ -1,7 +1,8 @@
-# final-project
+# Bitirme Projesi :beer:
+
 Sakarya Üniversitesi, Bilgisayar Mühendisliği Bölümü, Bitirme Ödevi
 
-# Mobil Turist Rehberi
+# Mobil Turist Rehberi :earth_americas:
 
 Uygulama android ve server tarafı olmak üzere iki aşamadan oluşacaktır.
 
