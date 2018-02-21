@@ -1,4 +1,4 @@
-# Bitirme Projesi :beer:
+# Bitirme Projesi :rocket: :beer:
 
 Sakarya Üniversitesi, Bilgisayar Mühendisliği Bölümü, Bitirme Ödevi
 
