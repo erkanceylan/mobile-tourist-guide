@@ -11,3 +11,5 @@ Free Mockup Application: https://marvelapp.com/
 Open Source Map APIS: https://opensource.com/life/15/11/getting-started-web-mapping
 
 Node JS Tutorial: https://www.w3schools.com/nodejs/default.asp
+
+15 Videoluk(ort. 4 dk) Node Js Giriş Video Seti: https://www.youtube.com/watch?v=uVwtVBpw7RQ&list=PLTjRvDozrdlydy3uUBWZlLUTNpJSGGCEm
