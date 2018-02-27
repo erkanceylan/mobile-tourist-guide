@@ -1,0 +1,13 @@
+Top 10 Travel APIS: https://www.programmableweb.com/news/top-10-travel-apis-uber-tripadvisor-and-expedia/analysis/2015/04/24?page=2
+
+Google Places API: https://developers.google.com/places/
+
+Tripit API: http://tripit.github.io/api/doc/v1/index.html#overview_section
+
+Sygic API: https://travel.sygic.com/en/b2b/api-key?product=api
+
+Free Mockup Application: https://marvelapp.com/
+
+Open Source Map APIS: https://opensource.com/life/15/11/getting-started-web-mapping
+
+Node JS Tutorial: https://www.w3schools.com/nodejs/default.asp
