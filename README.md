@@ -10,13 +10,14 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 
 ### To-Do List
 
-- [ ] Verilerin çekileceği public free api ler tespit edilecek
-- [ ] Logo oluşturulacak
-- [ ] Veritabanı tasarımı yapılacak
-- [ ] Android uygulama için mockup tasarımı yapılacak 
-- [ ] Android üzerine ders çalışılacak
-- [ ] Node JS ile API yazmak öğrenilecek
-- [ ] Server üzerinde Mongodb veritabanı oluşturulacak
-- [ ] Node JS ile REST API yazılacak
-- [ ] Android uygulamanın arayüzleri oluşturulmaya başlanacak
-- [ ] Android uygulamada model sınıfları tanımlanacak
+- [ ] UML öğrenilecek, projenin UML dökümanları hazırlanacak.
+- [ ] Verilerin çekileceği public free api ler tespit edilecek.
+- [ ] Logo oluşturulacak.
+- [ ] Veritabanı tasarımı yapılacak.
+- [ ] Android uygulama için mockup tasarımı yapılacak.
+- [ ] Android üzerine ders çalışılacak.
+- [ ] Node JS ile API yazmak öğrenilecek.
+- [ ] Server üzerinde Mongodb veritabanı oluşturulacak.
+- [ ] Node JS ile REST API yazılacak.
+- [ ] Android uygulamanın arayüzleri oluşturulmaya başlanacak.
+- [ ] Android uygulamada model sınıfları tanımlanacak.
