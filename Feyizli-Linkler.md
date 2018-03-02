@@ -24,6 +24,5 @@ Common Design Patterns for Android: https://www.raywenderlich.com/109843/common-
  
 Android Uygulamalar İçin icon vs Assetler Oluşturmak İçin Asset Studio:  
 https://romannurik.github.io/AndroidAssetStudio/ 
--
  
 Android Uygulama İçin Başlangıç Ekranı(Splash Screen) Oluşturma Rehberi: https://android-arsenal.com/details/1/2605
