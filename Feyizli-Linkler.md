@@ -15,3 +15,6 @@ Node JS Tutorial: https://www.w3schools.com/nodejs/default.asp
 15 Videoluk(ort. 4 dk, toplam 73 dk) Node Js Giriş Video Seti: https://www.youtube.com/watch?v=uVwtVBpw7RQ&list=PLTjRvDozrdlydy3uUBWZlLUTNpJSGGCEm
 
 Build REST API with Node JS: https://stormpath.com/blog/tutorial-build-rest-api-mobile-apps-using-node-js
+
+
+No-Sql Data Modelling Techniques: https://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/
