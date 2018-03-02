@@ -16,5 +16,6 @@ Node JS Tutorial: https://www.w3schools.com/nodejs/default.asp
 
 Build REST API with Node JS: https://stormpath.com/blog/tutorial-build-rest-api-mobile-apps-using-node-js
 
+Database Design: https://www.kidscodecs.com/database-design
 
 No-Sql Data Modelling Techniques: https://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/
