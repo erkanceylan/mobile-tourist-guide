@@ -19,3 +19,11 @@ Build REST API with Node JS: https://stormpath.com/blog/tutorial-build-rest-api-
 Database Design: https://www.kidscodecs.com/database-design
 
 No-Sql Data Modelling Techniques: https://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/
+
+Common Design Patterns for Android: https://www.raywenderlich.com/109843/common-design-patterns-for-android 
+ 
+Android Uygulamalar İçin icon vs Assetler Oluşturmak İçin Asset Studio:  
+https://romannurik.github.io/AndroidAssetStudio/ 
+-
+ 
+Android Uygulama İçin Başlangıç Ekranı(Splash Screen) Oluşturma Rehberi: https://android-arsenal.com/details/1/2605
