@@ -1,6 +1,6 @@
-## Uygulamada Yer Alacak Veriler
+## Uygulamada Yer Alacak Veriler 
 
-* Kullanıcı
+* Kullanıcı :bust_in_silhouette:
     * Kullanıcı ID
     * Kullanıcı Adı (unique)
     * Adı Soyadı
@@ -10,7 +10,7 @@
     * Gezilen Şehirler []
         * Seyahat Tarihi
 
-* Ülke
+* Ülke :earth_africa:
     * Ülke ID
     * Ülke Adı
     * Ülke Bayrağı (olabilir)
@@ -21,7 +21,7 @@
     * Nüfus
     * Şehirler[] (Puanlara göre listele)
 
-* Şehir
+* Şehir :city_sunset:
     * Şehir ID
     * Şehir Adı
     * Koordinat x
@@ -30,14 +30,14 @@
     * Puanlamaya göre yıldızı (5 yıldız üzerinden değerlendirme)
     * Gezilecek Yerler []
 
-* Gezilecek Yerler
+* Gezilecek Yerler :rainbow:
     * Gezilecek Yer ID
     * Gezilecek Yer Adı (Başlığı ya da)
     * Puanlamaya göre yıldızı (5 yıldız üzerinden değerlendirme)
     * Koordinat x
     * Koordinat y
 
-## Android Uygulamada İstenecek İzinler
+## Android Uygulamada İstenecek İzinler 
 
 * İnternet
 * Lokasyon    
