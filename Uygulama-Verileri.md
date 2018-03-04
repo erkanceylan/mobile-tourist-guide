@@ -46,6 +46,8 @@
 
 Link: https://developer-tripadvisor.com/content-api/
 
+Şehirlere ait tarihi ve turistik önemli yerleri veren api.
+
 Approved users of the TripAdvisor Content API can access the following business details for accommodations, restaurants, and attractions:
 
 Location ID, name, address, latitude & longitude
@@ -54,10 +56,21 @@ Overall rating, ranking, subratings, awards, the number of reviews the rating is
 Price level symbol, accommodation category/subcategory, attraction type, restaurant cuisine(s)
 
 ```Kısıtlamalar```
-
+* İstek atmak için authentication key gerekli
 * Saniyede en fazla 50 istek
 * Günlük en fazla 1,000 istek
 * Uygulama TripAdvisor tarafından onaylanırsa günlük 10,000 e çıkıyor. (Ancak TripAdvisor'un logo kullanma vs zorunlulukları mevcut)
+
+NOT: Authentication Key için başvuru yaptık. Kabul edilirse mail yoluyla bildirilecek.
+
+## Sygic Travel API
+
+Şehirlere ait tarihi ve turistik önemli yerleri veren diğer api.
+
+```Kısıtlamalar```
+* İstek atmak için authentication key gerekli
+
+NOT: Şuan service unavailable görünüyor!
 
 ## Restcountries API
 
