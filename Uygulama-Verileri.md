@@ -65,12 +65,15 @@ NOT: Authentication Key için başvuru yaptık. Kabul edilirse mail yoluyla bild
 
 ## Sygic Travel API
 
+Link: http://docs.sygictravelapi.com/1.0/
+
 Şehirlere ait tarihi ve turistik önemli yerleri veren diğer api.
 
 ```Kısıtlamalar```
 * İstek atmak için authentication key gerekli
+* Ayda en fazla 1000 istek
 
-NOT: Şuan service unavailable görünüyor!
+NOT: Authentication Key için başvuru yaptık. Kabul edilirse mail yoluyla bildirilecek.
 
 ## Restcountries API
 
