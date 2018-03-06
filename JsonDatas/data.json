@@ -1,0 +1,311 @@
+{
+    "SORGU:":"https://api.sygictravelapi.com/1.0/en/places/list",
+
+
+
+    "status_code": 200,
+    "data": {
+        "places": [
+            {
+                "id": "country:1",
+                "level": "country",
+                "rating": 10.004,
+                "quadkey": "031313131130100013",
+                "location": {
+                    "lat": 51.5073218,
+                    "lng": -0.1276475
+                },
+                "bounding_box": {
+                    "south": 49.674,
+                    "west": -14.0155171,
+                    "north": 61.0609999,
+                    "east": 2.0919116
+                },
+                "name": "United Kingdom",
+                "name_suffix": "Europe",
+                "url": "https://travel.sygic.com/go/country:1",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:1"
+                ],
+                "perex": "The United Kingdom of Great Britain and Northern Ireland, commonly known as the United Kingdom or Britain, is a sovereign country in…",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:1"
+            },
+            {
+                "id": "country:20",
+                "level": "country",
+                "rating": 9.9552914469568,
+                "quadkey": "120232221130002001",
+                "location": {
+                    "lat": 41.8933202,
+                    "lng": 12.4829321
+                },
+                "bounding_box": {
+                    "south": 35.2889616,
+                    "west": 6.6272657,
+                    "north": 47.0921462,
+                    "east": 18.7844746
+                },
+                "name": "Italy",
+                "name_suffix": "Europe",
+                "url": "https://travel.sygic.com/go/country:20",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:1"
+                ],
+                "perex": "Italy, officially the Italian Republic, is a unitary parliamentary republic in Europe.",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:20"
+            },
+            {
+                "id": "continent:1",
+                "level": "continent",
+                "rating": 9.4427344713558,
+                "quadkey": "120203132023112223",
+                "location": {
+                    "lat": 51.0000003,
+                    "lng": 9.9999997
+                },
+                "bounding_box": {
+                    "south": 34.5,
+                    "west": -31.5,
+                    "north": 82.2,
+                    "east": 74.4
+                },
+                "name": "Europe",
+                "name_suffix": null,
+                "url": "https://travel.sygic.com/go/continent:1",
+                "duration": 3600,
+                "marker": "destination:continent",
+                "categories": [],
+                "parent_ids": [],
+                "perex": null,
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/continent:1"
+            },
+            {
+                "id": "country:14",
+                "level": "country",
+                "rating": 9.4427344713558,
+                "quadkey": "120220011012112000",
+                "location": {
+                    "lat": 48.8566101,
+                    "lng": 2.3514991
+                },
+                "bounding_box": {
+                    "south": 41.2632184,
+                    "west": -5.4661315,
+                    "north": 51.268318,
+                    "east": 9.8678344
+                },
+                "name": "France",
+                "name_suffix": "Europe",
+                "url": "https://travel.sygic.com/go/country:14",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:1"
+                ],
+                "perex": "France, officially the French Republic, is a country whose territory consists of metropolitan France in western Europe, as well as several…",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:14"
+            },
+            {
+                "id": "country:43",
+                "level": "country",
+                "rating": 7.5511445169363,
+                "quadkey": "032010032231233311",
+                "location": {
+                    "lat": 38.8949549,
+                    "lng": -77.0366457
+                },
+                "bounding_box": {
+                    "south": 24.252007,
+                    "west": -125.0840939,
+                    "north": 49.38449,
+                    "east": -66.8854162
+                },
+                "name": "United States of America",
+                "name_suffix": "North America",
+                "url": "https://travel.sygic.com/go/country:43",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:6"
+                ],
+                "perex": "The United States of America, commonly known as the United States or America, is a federal republic composed of 50 states, a federal…",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:43"
+            },
+            {
+                "id": "continent:6",
+                "level": "continent",
+                "rating": 7.5511445169363,
+                "quadkey": "021302122133112322",
+                "location": {
+                    "lat": 51.0000002,
+                    "lng": -109.0000002
+                },
+                "bounding_box": {
+                    "south": -12.2,
+                    "west": -154.4,
+                    "north": 82,
+                    "east": 11
+                },
+                "name": "North America",
+                "name_suffix": null,
+                "url": "https://travel.sygic.com/go/continent:6",
+                "duration": 3600,
+                "marker": "destination:continent",
+                "categories": [],
+                "parent_ids": [],
+                "perex": null,
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": null
+            },
+            {
+                "id": "country:13",
+                "level": "country",
+                "rating": 6.0358169630887,
+                "quadkey": "033111012101132311",
+                "location": {
+                    "lat": 40.4167047,
+                    "lng": -3.7035825
+                },
+                "bounding_box": {
+                    "south": 35.1705417,
+                    "west": -9.575454,
+                    "north": 43.9933087,
+                    "east": 4.5918884
+                },
+                "name": "Spain",
+                "name_suffix": "Europe",
+                "url": "https://travel.sygic.com/go/country:13",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:1"
+                ],
+                "perex": "Spain, officially the Kingdom of Spain, is a country mostly located on the Iberian Peninsula in Europe, with there also being two large…",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:13"
+            },
+            {
+                "id": "country:5",
+                "level": "country",
+                "rating": 6.0228578067745,
+                "quadkey": "120212302122200303",
+                "location": {
+                    "lat": 50.0874653,
+                    "lng": 14.4212535
+                },
+                "bounding_box": {
+                    "south": 48.5518135,
+                    "west": 12.09059,
+                    "north": 51.0557036,
+                    "east": 18.859216
+                },
+                "name": "Czech Republic",
+                "name_suffix": "Europe",
+                "url": "https://travel.sygic.com/go/country:5",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:1"
+                ],
+                "perex": "The Czech Republic, also known as Czechia, is a landlocked nation state in Central Europe bordered by Germany to the west, Austria to the…",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:5"
+            },
+            {
+                "id": "country:247",
+                "level": "country",
+                "rating": 6.0058768433283,
+                "quadkey": "120232221103323231",
+                "location": {
+                    "lat": 41.9034912,
+                    "lng": 12.4528348
+                },
+                "bounding_box": {
+                    "south": 41.9002044,
+                    "west": 12.4457442,
+                    "north": 41.9073911,
+                    "east": 12.4583554
+                },
+                "name": "Vatican City",
+                "name_suffix": "Europe",
+                "url": "https://travel.sygic.com/go/country:247",
+                "duration": 3600,
+                "marker": "destination:country",
+                "categories": [],
+                "parent_ids": [
+                    "continent:1"
+                ],
+                "perex": "Vatican City, officially Vatican City State or State of Vatican City, is a country located within the city of Rome.",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/country:247"
+            },
+            {
+                "id": "region:441",
+                "level": "state",
+                "rating": 9.9552914469568,
+                "quadkey": "120232221130002001",
+                "location": {
+                    "lat": 41.8933202,
+                    "lng": 12.4829321
+                },
+                "bounding_box": {
+                    "south": 40.7849283,
+                    "west": 11.4491695,
+                    "north": 42.8401408,
+                    "east": 14.0276445
+                },
+                "name": "Lazio",
+                "name_suffix": "Italy",
+                "url": "https://travel.sygic.com/go/region:441",
+                "duration": 3600,
+                "marker": "destination:state",
+                "categories": [],
+                "parent_ids": [
+                    "region:441",
+                    "region:2011470",
+                    "country:20",
+                    "continent:1"
+                ],
+                "perex": "Lazio is one of the 20 administrative regions of Italy. Situated in the central peninsular section of the country, it has almost 5.9 million…",
+                "customer_rating": null,
+                "star_rating": null,
+                "star_rating_unofficial": null,
+                "thumbnail_url": "https://media-cdn.sygictraveldata.com/media/region:441"
+            }
+        ]
+    },
+    "server_timestamp": "2018-03-06T18:05:26+00:00"
+}

@@ -73,7 +73,7 @@ Link: http://docs.sygictravelapi.com/1.0/
 * İstek atmak için authentication key gerekli
 * Ayda en fazla 1000 istek
 
-NOT: Authentication Key için başvuru yaptık. Kabul edilirse mail yoluyla bildirilecek.
+NOT: Authentication Key için başvuru yaptık. Kabul edildi. Authentication Key'imiz var.
 
 ## Restcountries API
 
