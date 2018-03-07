@@ -10,10 +10,11 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 
 ### To-Do List
 
+- [ ] Uygulamaya isim bulunacak.
+- [ ] Uygulamaya logo oluşturulacak.
 - [ ] API'a ülke kodu 2'den 217'ye kadar olan istek atıp, elde edilen verilen çekilecek.
 - [ ] UML öğrenilecek, projenin UML dökümanları hazırlanacak.
 - [ ] Verilerin çekileceği public free api ler tespit edilecek.
-- [ ] Logo oluşturulacak.
 - [ ] Veritabanı tasarımı yapılacak.
 - [ ] Android uygulama için mockup tasarımı yapılacak.
 - [ ] Android üzerine ders çalışılacak.
