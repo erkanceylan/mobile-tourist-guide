@@ -14,7 +14,8 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 - [ ] Uygulamaya logo oluşturulacak.
 - [ ] API'a ülke kodu 2'den 217'ye kadar olan istek atıp, elde edilen verilen çekilecek.
 - [ ] UML öğrenilecek, projenin UML dökümanları hazırlanacak.
-- [ ] Verilerin çekileceği public free api ler tespit edilecek.
+- [x] Verilerin çekileceği public free api ler tespit edilecek.
+- [x] Veriler işlenmek üzere API'lardan temin edilecek.
 - [ ] Veritabanı tasarımı yapılacak.
 - [ ] Android uygulama için mockup tasarımı yapılacak.
 - [ ] Android üzerine ders çalışılacak.
