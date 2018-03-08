@@ -24,4 +24,6 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 - [ ] Node JS ile REST API yazılacak.
 - [ ] Android uygulamanın arayüzleri oluşturulmaya başlanacak.
 - [ ] Android uygulamada model sınıfları tanımlanacak.
-https://api.sygictravelapi.com/1.0/en/places/list?parents=country:1&level=poi&limit=1024
+
+
+We are building this app with :heart:

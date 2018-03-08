@@ -2,7 +2,7 @@
 
 Projemizde kullanılmak üzere bir Restful API oluşturacağız.
 
-API: Application Programming Interface, elimizde bulunan bir takım verilere dışardan başka programcıların erişebilmesi veya değiştirebilmesine yapayan program arayüzü. 
+<b>API:</b> Application Programming Interface, elimizde bulunan bir takım verilere dışardan başka programcıların erişebilmesi veya değiştirebilmesine yapayan program arayüzü. 
 
 ![API-1](https://github.com/erkanceylan/final-project/blob/master/assets/api1.png)
 
@@ -26,7 +26,6 @@ Aşağıda hangi CRUD işlemlerinin hangi HTTP metodlarıyla gerçekleştirildi�
 
 ![API-8](https://github.com/erkanceylan/final-project/blob/master/assets/api8.png)
 
-![API-9](https://github.com/erkanceylan/final-project/blob/master/assets/api9.png)
 
 
-["Video Link"](https://www.youtube.com/watch?v=SLwpqD8n3d0)
+[Kaynak Video Linki](https://www.youtube.com/watch?v=SLwpqD8n3d0)
