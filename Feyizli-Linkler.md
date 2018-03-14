@@ -26,3 +26,6 @@ Android Uygulamalar İçin icon vs Assetler Oluşturmak İçin Asset Studio:
 https://romannurik.github.io/AndroidAssetStudio/ 
  
 Android Uygulama İçin Başlangıç Ekranı(Splash Screen) Oluşturma Rehberi: https://android-arsenal.com/details/1/2605
+
+Open Layer Map API:
+https://openlayers.org/en/latest/apidoc/
