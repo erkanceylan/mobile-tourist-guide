@@ -1,6 +1,7 @@
 
 ### Örnek Ülke Modeli
 
+```javascript
 {
 	"countryId":"country:172",
 	"name":"Afghanistan",
@@ -13,18 +14,22 @@
 		...
 	]
 }
+```
 
 ### Örnek Şehir Modeli
 
+```javascript
 {
 	"cityId":"city:1",
 	"name":"London",
 	"country":"country:1",
 	"places":["poi:441","poi:440",...]
 }
+```
 
 ## Örnek Turistik Yer Modeli
 
+```javascript
 {
  	"placeId": "poi:13454402",
   	"rating": 0.002,
@@ -38,3 +43,4 @@
   	"parentIds": [ "region:31971", "country:46", "continent:2" ],
   	"categories": [ "sleeping" ] 
 }
+```
