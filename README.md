@@ -1,5 +1,6 @@
 # Bitirme Projesi :rocket: :beer:
 
+### Mobile Tourist Guide
 Sakarya Üniversitesi, Bilgisayar Mühendisliği Bölümü, Bitirme Ödevi
 
 # Mobil Turist Rehberi :earth_americas:
@@ -10,7 +11,7 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 
 ### To-Do List
 
-- [ ] Uygulamaya isim bulunacak.
+- [x] Uygulamaya isim bulunacak.
 - [ ] Uygulamaya logo oluşturulacak.
 - [x] API'a ülke kodu 1'den 217'ye kadar olan istek atıp, elde edilen verilen çekilecek.
 - [ ] UML öğrenilecek, projenin UML dökümanları hazırlanacak.
@@ -20,10 +21,11 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 - [ ] Android uygulama için mockup tasarımı yapılacak.
 - [ ] Android üzerine ders çalışılacak.
 - [x] Node JS ile API yazmak öğrenilecek.
-- [ ] Server üzerinde Mongodb veritabanı oluşturulacak.
+- [x] Server üzerinde Mongodb veritabanı oluşturulacak.
 - [x] Node JS ile REST API yazılacak.
 - [ ] Android uygulamanın arayüzleri oluşturulmaya başlanacak.
 - [ ] Android uygulamada model sınıfları tanımlanacak.
+- [ ] Android uygulamada Web Api'den asenkron veri çekme kütüphanesi yazılacak.
 
 
 We are building this app with :heart:
