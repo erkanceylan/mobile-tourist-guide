@@ -32,6 +32,17 @@ var PlaceSchema = new Schema({
     categories: Array
 });
 
+var UserSchema = new Schema({
+
+    name: String,
+    photo: String,
+    email: String,
+    password: String,
+    latitude: Number,
+    longitude:Number,
+    plannedTravels: Array
+});
+
 
 var Country = mongoose.model("Country", CountrySchema);
 var City = mongoose.model("City", CitySchema);
