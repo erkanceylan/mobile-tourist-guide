@@ -47,7 +47,9 @@ var UserSchema = new Schema({
 var Country = mongoose.model("Country", CountrySchema);
 var City = mongoose.model("City", CitySchema);
 var Place = mongoose.model("Place", PlaceSchema);
+var User = mongoose.model("User", UserSchema);
 
 module.exports.Country = Country;
 module.exports.City = City;
 module.exports.Place = Place;
+module.exports.User = User;

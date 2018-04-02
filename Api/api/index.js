@@ -1,8 +1,12 @@
 const express = require('express');
-var mongoose=require('mongoose');
-var schemas=require('./schemas.js');
+const mongoose=require('mongoose');
+const schemas=require('./schemas.js');
+const joi=require('joi');
 
 const app = express();
+app.use(express.json());
+
+
 
 const CountryModel=schemas.Country;
 const CityModel=schemas.City;
@@ -79,7 +83,6 @@ app.get('/api/places/:id',(req,res)=>{
 
 app.get('/api/places/:idType/:id',(req,res)=>{
     
-            
     if(req.params.idType=='city'){
 
         CityModel.findOne({cityId:req.params.id}).exec((err,city)=>{
@@ -134,12 +137,42 @@ app.get('/api/places/:idType/:id',(req,res)=>{
     }
 });
 
-app.get('/api/users/',(req,res)=>{
+//LOGIN
+app.post('/api/login/',(req,res)=>{
+    const schema={
+        email: joi.string().min(3).required(),
+        password: joi.string().min(3).required(),
+    };
+    const result = joi.validate(req.body, schema);
 
+    if(result.error){
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+    UserModel.findOne({email: req.body.email, password: req.body.password}).exec((err,user)=>{
+        if(err) throw err;
+        
+        if(!user){
+            res.status(404).send('User not found!');
+            return;
+        }
+        res.send(user);
+    });
 });
-
+//INSERT USER - Kullanıcı Ekleme
 app.post('/api/users/',(req,res)=>{
 
+    const schema={
+        name: joi.string().min(3).required(),
+        email: joi.string().min(3).required(),
+        password: joi.string().min(3).required(),
+    };
+    const result = joi.validate(req.body, schema);
+
+    if(result.error){
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
     const newUser=new UserModel({
         name: req.body.name,
         photo: null,
@@ -155,6 +188,34 @@ app.post('/api/users/',(req,res)=>{
 
         res.send(newUser);
         console.log(newUser.name+' saved successfully!');
+    });
+});
+//UPDATE USER - Kullanıcı Güncelleme
+app.put('/api/users/:id',(req,res)=>{
+    const schema={
+        name: joi.string().min(3).required(),
+        email: joi.string().min(3).required(),
+        password: joi.string().min(3).required(),
+        plannedTravels: joi.required()
+    };
+
+    const result = joi.validate(req.body, schema);
+    if(result.error){
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+
+    UserModel.findOneAndUpdate({_id: req.params.id},{$set:{
+        name:req.body.name,
+        email:req.body.email,
+        password:req.body.password,
+        photo:req.body.photo,
+        langitude:req.body.langitude,
+        longitude:req.body.longitude,
+        plannedTravels:req.body.plannedTravels
+    }},{upsert: true},(err,user)=>{
+        if(err) throw err;   
+        res.status(204);
     });
 });
 
