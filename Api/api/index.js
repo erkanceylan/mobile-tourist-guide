@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 
 
-
 const CountryModel=schemas.Country;
 const CityModel=schemas.City;
 const PlaceModel=schemas.Place;
@@ -51,6 +50,24 @@ app.get('/api/countries/:id',(req,res)=>{
     });
 });
 
+app.get('/api/cities',(req,res)=>{
+    
+    const schema={
+        name: joi.string().min(1).required()
+    };
+    const result = joi.validate(req.query, schema);
+
+    if(result.error){
+        res.status(400).send(result.error.details[0].message);
+        return;
+    }
+    CityModel.find({name: new RegExp(req.query.name, 'i')},{ places: 0}).limit(10).exec((err,cities)=>{
+        if(err) throw err;
+        
+        res.send(cities);
+    });
+});
+
 app.get('/api/cities/:idType/:id',(req,res)=>{
 
     if(req.params.idType=='city'){
@@ -61,14 +78,14 @@ app.get('/api/cities/:idType/:id',(req,res)=>{
         });
     }
     else if(req.params.idType=='country'){
-        CityModel.find({country: req.params.id}).exec((err,cities)=>{
+        CityModel.find({country: req.params.id},{ places: 0}).exec((err,cities)=>{
             if(err) throw err;
         
             res.send(cities);
         });
     }
     else{
-        res.send('invalid parameter: '+req.params.idType);
+        res.status(400).send('invalid parameter: '+req.params.idType);
     }
 });
 
@@ -159,7 +176,7 @@ app.post('/api/login/',(req,res)=>{
         res.send(user);
     });
 });
-//INSERT USER - Kullanıcı Ekleme
+//SIGN UP - INSERT USER - Kullanıcı Ekleme
 app.post('/api/users/',(req,res)=>{
 
     const schema={
