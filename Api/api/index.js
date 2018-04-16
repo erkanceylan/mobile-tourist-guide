@@ -20,14 +20,14 @@ mongoose.connect(mongoDB, function(err) {
 
 app.get('/',(req,res)=>{
     var link1='<a href="/api/countries">Get All Countries</a>';
-    var link2='<a href="/api/countries/country:34">Get A Country</a>';
+    var link2='<a href="/api/countries/Turkey">Get A Country With Country Name</a>';
     var link3='<a href="/api/cities/city/city:2072">Get City With City Id</a>';
-    var link4='<a href="/api/cities/country/country:34">Get Cities With Country Id</a>';
+    var link4='<a href="/api/cities/country/Turkey">Get Cities With Country Name</a>';
     var link5='<a href="/api/places/poi:441">Get A Place</a>';
     var link6='<a href="/api/places/city/city:2072">Get Places With City Id</a>';
-    var link7='<a href="/api/places/country/country:34">Get Places With Country Id</a>';
+    var link7='<a href="/api/places/country/Turkey">Get Places With Country Name</a>';
     var link8='<a href="/api/places/city/city:2072?category=sightseeing">Get Places With City Id And Category</a>';
-    var link9='<a href="/api/places/country/country:34?category=sightseeing">Get Places With Country Id And Category</a>';
+    var link9='<a href="/api/places/country/Turkey?category=sightseeing">Get Places With Country Name And Category</a>';
     res.send(`Örnek Sorgu Linkleri</br>${link1}</br>${link2}</br>${link3}</br>${link4}</br>${link5}</br>${link6}</br>${link7}</br>${link8}</br>${link9}</br>`);
 });
 
@@ -41,9 +41,9 @@ app.get('/api/countries',(req,res)=>{
     
 });
 
-app.get('/api/countries/:id',(req,res)=>{
+app.get('/api/countries/:name',(req,res)=>{
 
-    CountryModel.findOne({countryId: req.params.id}).exec((err,country)=>{
+    CountryModel.findOne({name: req.params.name}).exec((err,country)=>{
         if(err) throw err;
         
         res.send(country);

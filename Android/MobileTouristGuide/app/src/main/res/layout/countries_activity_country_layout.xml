@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fcfcfc">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:id="@+id/countries_activity_country_layout_lanetTextView"/>
+
+    <ImageView
+        android:id="@+id/countries_activity_country_layout_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/default_place"/>
+
+    <TextView
+        android:padding="30dp"
+        android:gravity="center"
+        android:id="@+id/countries_activity_country_layout_txtCountryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New York"
+        android:textSize="30sp" />
+</LinearLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="30dp"
+    android:background="#fcfcfc">
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:id="@+id/explore_activity_city_list_layout_lanetTextView"/>
+
+    <TextView
+        android:padding="20dp"
+        android:id="@+id/explore_activity_city_list_layout_txtCityName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="New York"
+        android:textSize="24sp" />
+
+    <TextView
+        android:padding="20dp"
+        android:id="@+id/explore_activity_city_list_layout_txtCountryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="United States of America"
+        android:textSize="20sp" />
+
+
+
+</LinearLayout>

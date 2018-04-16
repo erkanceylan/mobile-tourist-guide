@@ -25,9 +25,11 @@ var PlaceSchema = new Schema({
     longitude: Number, 
     name: String, 
     cityCountryName: String, 
-    description: String, 
+    description: String,
+    longDescription: String, 
     thumbnail: String, 
     marker: String,
+    media: Array,
     parentIds: Array,
     categories: Array
 });
