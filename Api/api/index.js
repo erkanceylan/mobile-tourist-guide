@@ -52,16 +52,16 @@ app.get('/api/countries/:name',(req,res)=>{
 
 app.get('/api/cities',(req,res)=>{
     
-    const schema={
-        name: joi.string().min(1).required()
-    };
-    const result = joi.validate(req.query, schema);
-
-    if(result.error){
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
     CityModel.find({name: new RegExp(req.query.name, 'i')},{ places: 0}).limit(10).exec((err,cities)=>{
+        if(err) throw err;
+        
+        res.send(cities);
+    });
+});
+
+app.get('/api/cities/editorspick',(req,res)=>{
+    
+    CityModel.find({editorsPick: true},{ places: 0}).exec((err,cities)=>{
         if(err) throw err;
         
         res.send(cities);

@@ -11,5 +11,5 @@ android:layout_height="match_parent"
     app:srcCompat="@mipmap/ic_launcher"
     android:scaleType="fitXY"
     android:adjustViewBounds="true"
-    android:id="@+id/ImageSliderCustomImageView" />
+    android:id="@+id/ImageSliderLayoutImageView" />
 </LinearLayout>

@@ -51,15 +51,16 @@
         android:layout_height="match_parent"
         android:padding="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true"
-        android:scrollbars="none">
+        android:fillViewport="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal">
+
             <android.support.v7.widget.CardView
+                android:id="@+id/CountryActivityCardViewCountryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -73,6 +74,8 @@
                     android:textSize="24sp" />
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
+                android:layout_below="@+id/CountryActivityCardViewCountryName"
+                android:id="@+id/CountryActivityCardViewCapitalCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -99,6 +102,8 @@
 
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
+                android:layout_below="@+id/CountryActivityCardViewCapitalCity"
+                android:id="@+id/CountryActivityCardViewPopulation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -126,6 +131,8 @@
 
 
             <android.support.v7.widget.CardView
+                android:layout_below="@+id/CountryActivityCardViewPopulation"
+                android:id="@+id/CountryActivityCardViewCities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -146,12 +153,12 @@
                         android:id="@+id/listViewCountryActivityCities"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scrollbars="vertical"/>
+                        />
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-        </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

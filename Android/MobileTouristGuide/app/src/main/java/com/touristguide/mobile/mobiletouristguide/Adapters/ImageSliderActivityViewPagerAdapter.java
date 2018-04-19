@@ -43,8 +43,8 @@ public class ImageSliderActivityViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.image_slider_custom_layout, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.ImageSliderCustomImageView);
+        View view = layoutInflater.inflate(R.layout.image_slider_image_view_layout, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.ImageSliderLayoutImageView);
         //imageView.setImageResource(images[position]);
 
         String mediaUrl=images[position];

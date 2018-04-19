@@ -32,7 +32,7 @@ public class PlaceActivity extends AppCompatActivity {
     private TextView txtCoordinates;
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView toolbarImageView;
-
+    private LinearLayout markerLinearLayout;
 
     private Place thisPlaceObject;
     private String placeJson;
@@ -64,6 +64,23 @@ public class PlaceActivity extends AppCompatActivity {
         }
 
         txtCoordinates.setText(String.valueOf(thisPlaceObject.getLatitude())+" , "+String.valueOf(thisPlaceObject.getLongitude()));
+
+        String [] markerArray=thisPlaceObject.getMarker().split(":");
+        for(int x=0;x<markerArray.length;x++) {
+            ImageView image = new ImageView(PlaceActivity.this);
+
+            int id = getApplicationContext().getResources().getIdentifier(markerArray[x], "drawable", getPackageName());
+            image.setBackgroundResource(id);
+
+
+            final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+            int pixels = (int) (40 * scale + 0.5f);
+
+            image.getLayoutParams().width= RelativeLayout.LayoutParams.WRAP_CONTENT;
+            image.getLayoutParams().height=pixels;
+            //image.requestLayout();
+            markerLinearLayout.addView(image);
+        }
 
         if(thisPlaceObject.getMedia().size()>0){
 
@@ -116,7 +133,7 @@ public class PlaceActivity extends AppCompatActivity {
         txtCoordinates=findViewById(R.id.txtPlaceActivityCoordinates);
         collapsingToolbar=findViewById(R.id.PlaceActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.PlaceActivityImageView);
-
+        markerLinearLayout=findViewById(R.id.linearLayoutPlaceActivityMarkers);
     }
 
     public void fullScreen() {

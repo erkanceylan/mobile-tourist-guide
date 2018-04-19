@@ -14,7 +14,8 @@ var CitySchema = new Schema({
     cityId: String, 
     name: String, 
     country: String, 
-    places: Array
+    places: Array,
+    editorsPick: Boolean
 });
 
 var PlaceSchema = new Schema({

@@ -29,6 +29,7 @@ import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
+import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 
 import org.json.JSONException;
 
@@ -206,6 +207,7 @@ public class CountryActivity extends AppCompatActivity {
                 public void run()
                 {
                     listViewCities.setAdapter(adapter);
+                    ListUtils.setDynamicHeight(listViewCities);
                     listViewCities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)

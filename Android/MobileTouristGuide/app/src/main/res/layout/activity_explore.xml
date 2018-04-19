@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,38 +11,113 @@
     tools:context=".ExploreActivity"
     android:background="#fcfcfc">
 
-    <EditText
-        android:id="@+id/searchText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/where_do_you_want_to_go"
-        android:inputType="textEmailAddress"
-        android:textSize="24sp" />
-
-    <ProgressBar
-        android:id="@+id/progressBarExploreActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:indeterminate="false"
-        android:visibility="invisible" />
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/cityListViewExploreActivity"
+        <EditText
+            android:id="@+id/searchText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="@string/where_do_you_want_to_go"
+            android:inputType="textEmailAddress"
+            android:textSize="24sp"
+            android:focusedByDefault="false"/>
 
-        <ScrollView
+        <ProgressBar
+            android:layout_below="@+id/searchText"
+            android:id="@+id/progressBarExploreActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:indeterminate="false"
+            android:visibility="invisible" />
+
+        <RelativeLayout
+            android:layout_below="@+id/progressBarExploreActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:id="@+id/ExploreActivityLayout1">
 
-        </ScrollView>
+            <ListView
+                android:id="@+id/ExploreActivityCityListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/ExploreActivityLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:id="@+id/ExploreActivityLayout2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ExploreActivityTextViewTopCities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#4FC3F7"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Top Cities"
+                android:textColor="#01579B"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:layout_below="@+id/ExploreActivityTextViewTopCities"
+                android:id="@+id/ExploreActivityTopCitiesListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ExploreActivityTextViewEditorsPick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ExploreActivityTopCitiesListView"
+                android:layout_marginTop="10dp"
+                android:background="#AED581"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Editor's Pick"
+                android:textColor="#33691E"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:layout_below="@+id/ExploreActivityTextViewEditorsPick"
+                android:id="@+id/ExploreActivityEditorsPickCitiesListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ExploreActivityTextViewCitiesNearYou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ExploreActivityEditorsPickCitiesListView"
+                android:layout_marginTop="10dp"
+                android:background="#FFB74D"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Cities Near You"
+                android:textColor="#E65100"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:layout_below="@+id/ExploreActivityTextViewCitiesNearYou"
+                android:id="@+id/ExploreActivityCitiesNearYouListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
     </RelativeLayout>
-</LinearLayout>
+
+</ScrollView>
