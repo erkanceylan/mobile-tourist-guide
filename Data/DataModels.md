@@ -31,16 +31,26 @@
 
 ```javascript
 {
- 	"placeId": "poi:13454402",
-  	"rating": 0.002,
-  	"latitude": 36.5685287,
-  	"longitude": 10.2156007,
-  	"name": "Dar el Habayeb",
-  	"cityCountryName": "Ben Arous, Tunisia",
-  	"description": null,
-  	"thumbnail": null,
-  	"marker": "sleeping:apartment:guest_accommodation",
-  	"parentIds": [ "region:31971", "country:46", "continent:2" ],
-  	"categories": [ "sleeping" ] 
+    "placeId" : "poi:441",
+    "rating" : 10.010573717949,
+    "latitude" : 51.5006895,
+    "longitude" : -0.1245839,
+    "name" : "Big Ben",
+    "cityCountryName" : "London, United Kingdom",
+    "description" : "The most famous bell in Europe, perhaps...",
+    "thumbnail" : "https://media-cdn.sygictraveldata.com/media/poi:441",
+    "marker" : "other:building:tower:bell",
+    "parentIds" : [ 
+        "city:87673", 
+        "region:2006111", 
+        "region:228", 
+        "city:1", 
+        "region:44", 
+        "country:1", 
+        "continent:1"
+    ],
+    "categories" : [ "sightseeing"],
+    "longDescription" : "The most famous bell in Europe, perhaps even in the world, Big Ben, is one ...",
+    "media" : [ "https://media-cdn.sygictraveldata.com/media/612664395a40232133447d33247d3832343638393731.jpg"]
 }
 ```
