@@ -27,12 +27,13 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".ExploreActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".IntroductionActivity" />
+        <activity android:name=".CitiesActivity" />
         <activity android:name=".CityActivity" />
         <activity android:name=".CountryActivity" />
         <activity android:name=".PlaceActivity" />
         <activity android:name=".ImageSlider" />
-        <activity android:name=".CountriesActivity"></activity>
+        <activity android:name=".CountriesActivity" />
+        <activity android:name=".SignupActivity"></activity>
     </application>
 
 </manifest>

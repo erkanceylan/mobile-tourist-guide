@@ -1,43 +1,43 @@
 package com.touristguide.mobile.mobiletouristguide;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+        import android.Manifest;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.pm.PackageManager;
+        import android.net.ConnectivityManager;
+        import android.net.NetworkInfo;
+        import android.os.Build;
+        import android.support.v4.app.ActivityCompat;
+        import android.support.v7.app.AlertDialog;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.text.Editable;
+        import android.text.TextWatcher;
+        import android.util.Log;
+        import android.view.View;
+        import android.view.WindowManager;
+        import android.widget.AdapterView;
+        import android.widget.EditText;
+        import android.widget.ListView;
+        import android.widget.ProgressBar;
+        import android.widget.RelativeLayout;
 
 
-import com.touristguide.mobile.mobiletouristguide.Adapters.ExplorerActivityCityListAdapter;
-import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
-import com.touristguide.mobile.mobiletouristguide.Models.City;
-import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
-import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
+        import com.touristguide.mobile.mobiletouristguide.Adapters.ExplorerActivityCityListAdapter;
+        import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
+        import com.touristguide.mobile.mobiletouristguide.Models.City;
+        import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
+        import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 
-import java.io.IOException;
-import java.util.ArrayList;
+        import java.io.IOException;
+        import java.util.ArrayList;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+        import okhttp3.Call;
+        import okhttp3.Callback;
+        import okhttp3.Response;
 
 //Keşfet Ekranı
-public class ExploreActivity extends AppCompatActivity {
+public class CitiesActivity extends AppCompatActivity  {
     private ArrayList<City> cityList;
     private ArrayList<City> topCitiesList;
     private ArrayList<City> edistorsPickList;
@@ -54,7 +54,7 @@ public class ExploreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_explore);
+        setContentView(R.layout.activity_cities);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         init();
         getSuggestionCities();
@@ -102,12 +102,12 @@ public class ExploreActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call call, final Response response) throws IOException {
 
-                                        try {
-                                            fillTheCities(response.body().string(),searchingCityListView);
-                                            //responseView.setText(response.body().string());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+                                    try {
+                                        fillTheCities(response.body().string(),searchingCityListView);
+                                        //responseView.setText(response.body().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
 
                                 }
                             });
@@ -174,14 +174,14 @@ public class ExploreActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
 
-                                try {
+                        try {
 
-                                    fillTheTopCities(response.body().string(),topCityListView);
+                            fillTheTopCities(response.body().string(),topCityListView);
 
-                                    //responseView.setText(response.body().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                            //responseView.setText(response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 });
@@ -195,13 +195,13 @@ public class ExploreActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
 
-                                try {
-                                    //progressBar.setVisibility(View.INVISIBLE);
-                                    fillTheEditorsPickCities(response.body().string(),editorsPickCityListView);
-                                    //responseView.setText(response.body().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                        try {
+                            //progressBar.setVisibility(View.INVISIBLE);
+                            fillTheEditorsPickCities(response.body().string(),editorsPickCityListView);
+                            //responseView.setText(response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -256,7 +256,7 @@ public class ExploreActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                         {
                             City city= cityList.get(position);
-                            Intent intent = new Intent(ExploreActivity.this, CityActivity.class);
+                            Intent intent = new Intent(CitiesActivity.this, CityActivity.class);
                             intent.putExtra("cityId",city.getCityId());
                             startActivity(intent);
                         }
@@ -289,7 +289,7 @@ public class ExploreActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                         {
                             City city= topCitiesList.get(position);
-                            Intent intent = new Intent(ExploreActivity.this, CityActivity.class);
+                            Intent intent = new Intent(CitiesActivity.this, CityActivity.class);
                             intent.putExtra("cityId",city.getCityId());
                             startActivity(intent);
                         }
@@ -320,7 +320,7 @@ public class ExploreActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                         {
                             City city= edistorsPickList.get(position);
-                            Intent intent = new Intent(ExploreActivity.this, CityActivity.class);
+                            Intent intent = new Intent(CitiesActivity.this, CityActivity.class);
                             intent.putExtra("cityId",city.getCityId());
                             startActivity(intent);
                         }

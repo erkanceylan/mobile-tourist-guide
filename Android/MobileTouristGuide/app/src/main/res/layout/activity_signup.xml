@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/SignupActivityImageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="#cbcbcb"/>
+
+    <Button
+        android:id="@+id/SignupActivityAddPhotoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a photo"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="Your name"/>
+    <EditText
+        android:id="@+id/SignupActivityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your name"/>
+    <Button
+        android:id="@+id/SignupActivityContunieButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contunie"
+        android:enabled="false"/>
+
+</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -36,6 +36,14 @@ android:orientation="vertical">
                 android:text="Countries"
                 android:textSize="18sp" />
 
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Search"
+                android:inputType="textPersonName" />
+
             <ProgressBar
                 android:id="@+id/progressBarCountriesActivity"
                 android:layout_width="wrap_content"

@@ -74,13 +74,6 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/responseText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

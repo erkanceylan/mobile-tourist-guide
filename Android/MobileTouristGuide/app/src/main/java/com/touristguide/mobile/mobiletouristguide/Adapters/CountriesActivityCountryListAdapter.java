@@ -2,8 +2,8 @@ package com.touristguide.mobile.mobiletouristguide.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.StrictMode;
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +12,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.caverock.androidsvg.SVGImageView;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.GenericRequestBuilder;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.StreamEncoder;
+import com.bumptech.glide.load.resource.file.FileToStreamDecoder;
+import com.caverock.androidsvg.SVG;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
 import com.touristguide.mobile.mobiletouristguide.R;
+import com.touristguide.mobile.mobiletouristguide.Utils.SvgDecoder;
+import com.touristguide.mobile.mobiletouristguide.Utils.SvgDrawableTranscoder;
+import com.touristguide.mobile.mobiletouristguide.Utils.SvgSoftwareLayerSetter;
 
-import java.net.URL;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class CountriesActivityCountryListAdapter extends ArrayAdapter<Country>
@@ -49,41 +56,25 @@ public class CountriesActivityCountryListAdapter extends ArrayAdapter<Country>
         ImageView imageView=convertView.findViewById(R.id.countries_activity_country_layout_imageView);
 
         countryName.setText(thisCountry.getName());
-
-
-        URL url;
-        Bitmap bmp=null;
-        String thumbnailUrl=thisCountry.getFlag();
-        if(thumbnailUrl!=null && !thumbnailUrl.isEmpty() && !thumbnailUrl.equals("null")){
-            //  try {
-
-            int SDK_INT = android.os.Build.VERSION.SDK_INT;
-            if (SDK_INT > 8)
-            {
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-                //your codes here
-/*
-                Picasso.with(getContext())
-                .load(thumbnailUrl)
-                .resize(600,600)
+        String mediaUrl=thisCountry.getFlag();
+        GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
+        requestBuilder = Glide.with(getContext())
+                .using(Glide.buildStreamModelLoader(Uri.class,getContext()), InputStream.class)
+                .from(Uri.class)
+                .as(SVG.class)
+                .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
+                .sourceEncoder(new StreamEncoder())
+                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder())).decoder(new SvgDecoder())
                 .placeholder(R.drawable.default_place)
                 .error(R.drawable.default_place)
-                .into(imageView);
-                // url = new URL(thumbnailUrl);
-                // bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                // imageView.setImageBitmap(bmp);
-  */
-            }
-    /*
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-        }
+                .animate(android.R.anim.fade_in)
+                .listener(new SvgSoftwareLayerSetter<Uri>());
 
+        Uri uri = Uri.parse(mediaUrl);
+        requestBuilder
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .load(uri)
+                .into(imageView);
 
         return super.getView(position,convertView,parent);
     }

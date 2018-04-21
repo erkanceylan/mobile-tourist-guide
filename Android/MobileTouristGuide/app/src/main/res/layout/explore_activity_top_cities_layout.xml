@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"
-        android:id="@+id/explore_activity_city_list_layout_lanetTextView"/>
+        android:id="@+id/explore_activity_top_cities_layout_lanetTextView"/>
 
     <TextView
         android:padding="20dp"

@@ -1,10 +1,12 @@
 package com.touristguide.mobile.mobiletouristguide;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ public class PlaceActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView toolbarImageView;
     private LinearLayout markerLinearLayout;
+    private LinearLayout categoryLinearLayout;
 
     private Place thisPlaceObject;
     private String placeJson;
@@ -46,6 +49,8 @@ public class PlaceActivity extends AppCompatActivity {
         getPlaceObjectFromPlaceJson();
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void getPlaceObjectFromPlaceJson() {
         thisPlaceObject = JsonToObject.GetPlaceFromJson(placeJson);
 
@@ -67,19 +72,32 @@ public class PlaceActivity extends AppCompatActivity {
 
         String [] markerArray=thisPlaceObject.getMarker().split(":");
         for(int x=0;x<markerArray.length;x++) {
+            Log.e("marker: ",markerArray[x]);
             ImageView image = new ImageView(PlaceActivity.this);
 
-            int id = getApplicationContext().getResources().getIdentifier(markerArray[x], "drawable", getPackageName());
-            image.setBackgroundResource(id);
+            int id;
+            id = getApplicationContext().getResources().getIdentifier(markerArray[x], "drawable", getPackageName());
+            if(id!=0){
+                image.setBackgroundResource(id);
 
+                final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+                int pixels = (int) (40 * scale + 0.5f);
 
-            final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
-            int pixels = (int) (40 * scale + 0.5f);
+                markerLinearLayout.addView(image);
+                image.getLayoutParams().width= RelativeLayout.LayoutParams.WRAP_CONTENT;
+                image.getLayoutParams().height=pixels;
+                image.requestLayout();
+            }
+        }
 
-            image.getLayoutParams().width= RelativeLayout.LayoutParams.WRAP_CONTENT;
-            image.getLayoutParams().height=pixels;
-            //image.requestLayout();
-            markerLinearLayout.addView(image);
+        for (String category: thisPlaceObject.getCategories()){
+            Log.e("category: ",category);
+            TextView tv=new TextView(PlaceActivity.this);
+            tv.setText(category);
+            tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tv.setTextSize(20);
+
+            categoryLinearLayout.addView(tv);
         }
 
         if(thisPlaceObject.getMedia().size()>0){
@@ -134,6 +152,7 @@ public class PlaceActivity extends AppCompatActivity {
         collapsingToolbar=findViewById(R.id.PlaceActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.PlaceActivityImageView);
         markerLinearLayout=findViewById(R.id.linearLayoutPlaceActivityMarkers);
+        categoryLinearLayout=findViewById(R.id.linearLayoutPlaceActivityCategories);
     }
 
     public void fullScreen() {

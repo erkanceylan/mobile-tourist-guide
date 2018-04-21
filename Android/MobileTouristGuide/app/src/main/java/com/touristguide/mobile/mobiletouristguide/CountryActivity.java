@@ -2,7 +2,7 @@ package com.touristguide.mobile.mobiletouristguide;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.drawable.PictureDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -12,32 +12,33 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.StreamEncoder;
+import com.bumptech.glide.load.resource.file.FileToStreamDecoder;
 import com.caverock.androidsvg.SVG;
-import com.squareup.picasso.Picasso;
 import com.touristguide.mobile.mobiletouristguide.Adapters.CountryActivityCityListAdapter;
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
-import com.touristguide.mobile.mobiletouristguide.Models.Place;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
 import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
+import com.touristguide.mobile.mobiletouristguide.Utils.SvgDecoder;
+import com.touristguide.mobile.mobiletouristguide.Utils.SvgDrawableTranscoder;
+import com.touristguide.mobile.mobiletouristguide.Utils.SvgSoftwareLayerSetter;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -70,7 +71,6 @@ public class CountryActivity extends AppCompatActivity {
         txtCapitalCity=findViewById(R.id.txtCountryActivityCapitalCity);
         txtPopulation=findViewById(R.id.txtCountryActivityPopulation);
         listViewCities=findViewById(R.id.listViewCountryActivityCities);
-
 
         collapsingToolbar=findViewById(R.id.CountryActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.CountryActivityImageView);
@@ -146,7 +146,7 @@ public class CountryActivity extends AppCompatActivity {
 
                     }
                 });
-                txtPopulation.setText(String.valueOf(thisCountryObject.getPopulation()));
+                txtPopulation.setText(getPopulationTextWithCommas(String.valueOf(thisCountryObject.getPopulation())));
                 collapsingToolbar.setTitle(thisCountryObject.getName());
                 Log.e("City Size: ", String.valueOf(thisCountryObject.getCities().size()));
 
@@ -161,29 +161,30 @@ public class CountryActivity extends AppCompatActivity {
                         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                                 .permitAll().build();
                         StrictMode.setThreadPolicy(policy);
-/* TODO: Svg yi nasıl gösterecegiz onu çozucez
+
+
+                    GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
                         requestBuilder = Glide.with(getApplicationContext())
-                                .using(Glide.buildStreamModelLoader(Uri.class, getApplicationContext()), InputStream.class)
+                                .using(Glide.buildStreamModelLoader(Uri.class,getApplicationContext()), InputStream.class)
                                 .from(Uri.class)
                                 .as(SVG.class)
                                 .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
                                 .sourceEncoder(new StreamEncoder())
-                                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder()))
-                                .decoder(new SvgDecoder())
-                                .placeholder(R.drawable.ic_facebook)
-                                .error(R.drawable.ic_web)
-                                .animate(android.R.anim.fade_in)
-                                .listener(new SvgSoftwareLayerSetter<Uri>());
-                        Picasso.with(getApplicationContext())
-                                .load(mediaUrl)
-                                .placeholder(R.drawable.default_place)
-                                .error(R.drawable.default_place)
+                                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder())).decoder(new SvgDecoder())
+                            .placeholder(R.drawable.default_place)
+                            .error(R.drawable.default_place)
+                            .animate(android.R.anim.fade_in)
+                            .listener(new SvgSoftwareLayerSetter<Uri>());
+
+                        Uri uri = Uri.parse(mediaUrl);
+                        requestBuilder
+                                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                                .load(uri)
                                 .into(toolbarImageView);
-    */
+
                     }
                 }
                 fillTheCities();
-                //mainLinearLayout.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -195,6 +196,38 @@ public class CountryActivity extends AppCompatActivity {
         }
         return null;
     }
+    private String getPopulationTextWithCommas(String text){
+        String populationText="";
+        char[] charArray = text.toCharArray();
+        final int size=charArray.length;
+        Log.e("size: ",String.valueOf(size));
+        if(size%3==0){
+            for (int i=0;i<size;i++){
+                if(i%3==0 && i!=0){
+                    populationText+=",";
+                }
+                populationText+=charArray[i];
+            }
+        }
+        else if(size%3==1){
+            for (int i=0;i<size;i++){
+                if(i%3==1 && i!=0){
+                    populationText+=",";
+                }
+                populationText+=charArray[i];
+            }
+        }
+        else if(size%3==2){
+            for (int i=0;i<size;i++){
+                if(i%3==2 && i!=0){
+                    populationText+=",";
+                }
+                populationText+=charArray[i];
+            }
+        }
+        return populationText;
+    }
+
     private void fillTheCities(){
         cityList=null;
         cityList=thisCountryObject.getCities();

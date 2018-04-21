@@ -59,9 +59,6 @@ public class CityActivityPlaceListAdapter extends ArrayAdapter<Place>
         else
             placeDescription.setText("");
 
-
-        URL url;
-        Bitmap bmp=null;
         String thumbnailUrl=thisPlace.getThumbnail();
         if(thumbnailUrl!=null && !thumbnailUrl.isEmpty() && !thumbnailUrl.equals("null")){
           //  try {
@@ -80,16 +77,8 @@ public class CityActivityPlaceListAdapter extends ArrayAdapter<Place>
                             .placeholder(R.drawable.default_place)
                             .error(R.drawable.default_place)
                             .into(imageView);
-                   // url = new URL(thumbnailUrl);
-                   // bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                   // imageView.setImageBitmap(bmp);
                 }
-/*
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
+
         }
 
 

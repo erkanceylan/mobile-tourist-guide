@@ -13,13 +13,13 @@ import com.touristguide.mobile.mobiletouristguide.R;
 
 import java.util.ArrayList;
 
-public class ExplorerActivityCityListAdapter extends ArrayAdapter<City>
+public class ExplorerActivityEditorsPickListAdapter extends ArrayAdapter<City>
 {
     private ArrayList<City> cities;
     Context context;
     int resource;
     int tvResourceId;
-    public ExplorerActivityCityListAdapter(Context context, int resource, int textViewResourceId, ArrayList<City> objects) {
+    public ExplorerActivityEditorsPickListAdapter(Context context, int resource, int textViewResourceId, ArrayList<City> objects) {
         super(context, resource, textViewResourceId, objects);
 
         this.tvResourceId=textViewResourceId;

@@ -22,7 +22,7 @@
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:title="America">
+            app:title="">
 
             <ImageView
                 android:id="@+id/CountryActivityImageView"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center_horizontal"
-                    android:text="The United States of America"
+                    android:text=""
                     android:textSize="24sp" />
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Washington D.C."
+                        android:text=""
                         android:textSize="24sp"/>
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center_horizontal"
-                    android:text="356909384"
+                    android:text=""
                     android:textSize="24sp"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

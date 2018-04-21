@@ -14,7 +14,7 @@
         android:id="@+id/countries_activity_country_layout_imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/default_place"/>
+        android:background="#fff"/>
 
     <TextView
         android:padding="30dp"

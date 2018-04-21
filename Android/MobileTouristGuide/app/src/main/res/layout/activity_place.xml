@@ -94,8 +94,8 @@
                         android:text="New York, The United States of America"
                         android:textSize="24sp"/>
                 </LinearLayout>
-
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,29 +109,58 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/markers"
+                        android:text="@string/description"
                         android:textSize="18sp"/>
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:id="@+id/linearLayoutPlaceActivityMarkers"
+
+                    <TextView
+                        android:id="@+id/txtPlaceLongDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        >
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            app:srcCompat="@drawable/discovering_art_centre"
-                            android:layout_weight="1"
-                            android:background="#33aa55"/>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            app:srcCompat="@drawable/destination_city"
-                            android:background="#aababc"
-                            android:layout_weight="1"/>
-                    </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="10dp"
+                        android:gravity="left|center_horizontal"
+                        android:text="New York, The United States of America sdjsdf sf sadf fsa g dgadfgas dfsad fsadf dsfadfagda asdg asdfasdf dag dgas.asd sdf sdaf sadf sdaf ah gadfgfdgdsf gdsfg dfshjfgsd fdsg fsdhtrjtrgdfs sdfg dfhsfdhsdfhdfg g."
+                        android:textSize="20sp"
+                        tools:padding="5dp" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLayoutPlaceActivityMarkers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/discovering_art_centre"
+                        android:layout_weight="1"
+                        android:background="#33aa55"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/destination_city"
+                        android:background="#aababc"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/markers"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,43 +200,25 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center_horizontal"
-                        android:text="@string/description"
+                        android:text="@string/categories"
                         android:textSize="18sp"/>
 
-                    <TextView
-                        android:id="@+id/txtPlaceLongDescription"
+                    <LinearLayout
+                        android:id="@+id/linearLayoutPlaceActivityCategories"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:padding="10dp"
-                        android:gravity="left|center_horizontal"
-                        android:text="New York, The United States of America sdjsdf sf sadf fsa g dgadfgas dfsad fsadf dsfadfagda asdg asdfasdf dag dgas.asd sdf sdaf sadf sdaf ah gadfgfdgdsf gdsfg dfshjfgsd fdsg fsdhtrjtrgdfs sdfg dfhsfdhsdfhdfg g."
-                        android:textSize="20sp"
-                        tools:padding="5dp" />
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                    </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <Button
+                android:id="@+id/PlaceActivityShowInMapButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/categories"
-                    android:textSize="18sp"/>
-                <LinearLayout
-                    android:id="@+id/linearLayoutPlaceActivityCategories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#cccccc">
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
+                android:layout_height="match_parent"
+                android:text="Show in map"/>
 
         </LinearLayout>
 

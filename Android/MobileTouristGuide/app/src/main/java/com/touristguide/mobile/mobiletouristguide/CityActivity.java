@@ -63,8 +63,6 @@ public class CityActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
     }
     private void getCityObjectFromCityId(){
-
-
         /* istek yapılıyor */
         if(isOnline()){
             try {
@@ -125,7 +123,14 @@ public class CityActivity extends AppCompatActivity {
 
                 txtCityName.setText(cityObject.getName());
                 txtCountryName.setText(cityObject.getCountry());
-
+                txtCountryName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(CityActivity.this, CountryActivity.class);
+                        intent.putExtra("countryName",cityObject.getCountry());
+                        startActivity(intent);
+                    }
+                });
                 mainLinearLayout.setVisibility(View.VISIBLE);
             }
         });
@@ -183,7 +188,7 @@ public class CityActivity extends AppCompatActivity {
         String responseJson=response;
         placesList = JsonToObject.GetPlacesFromJson(responseJson);
         placesJsonList = JsonToObject.GetPlacesJsonListFromJson(responseJson);
-        Log.i("## Place list:",String.valueOf(placesList.size()));
+       // Log.i("## Place list:",String.valueOf(placesList.size()));
         if(placesList.size()!=0){
             final CityActivityPlaceListAdapter adapter=new CityActivityPlaceListAdapter(this,R.layout.city_activity_place_list_layout,R.id.city_activity_place_list_layout_lanetTextView, placesList);
             runOnUiThread(new Runnable() {
@@ -196,12 +201,9 @@ public class CityActivity extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                         {
-                            Place place= placesList.get(position);
-                           // Toast.makeText(getApplicationContext(), place.getName(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(CityActivity.this, PlaceActivity.class);
                             intent.putExtra("placeJson",placesJsonList.get(position));
                             startActivity(intent);
-
                         }
                     });
                 }
