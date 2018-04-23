@@ -166,14 +166,22 @@ app.post('/api/login/',(req,res)=>{
         res.status(400).send(result.error.details[0].message);
         return;
     }
-    UserModel.findOne({email: req.body.email, password: req.body.password}).exec((err,user)=>{
+    UserModel.findOne({email: req.body.email}).exec((err,user)=>{
         if(err) throw err;
         
         if(!user){
-            res.status(404).send('User not found!');
+            res.send('{"response":"user not found!"}');
             return;
         }
-        res.send(user);
+        else{
+            if(user.password==req.body.password){
+                res.send(user);
+            }
+            else{
+                res.send('{"response":"password is not correct!"}');
+            }   
+        }
+        
     });
 });
 //SIGN UP - INSERT USER - Kullanıcı Ekleme

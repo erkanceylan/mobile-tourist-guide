@@ -1,127 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ExploreActivity"
+    android:padding="10dp"
+    android:layout_gravity="center"
     android:background="#fcfcfc">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+        <LinearLayout
+            android:layout_marginTop="120dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="170dp">
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ExploreActivityCardViewCities"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                card_view:cardBackgroundColor="#00E676">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/city"/>
 
-        <EditText
-            android:id="@+id/searchText"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Explore Cities"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="22sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ExploreActivityCardViewCountries"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                card_view:cardBackgroundColor="#E53935">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/flag"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Explore Countries"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="22sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ExploreActivityCardViewProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/where_do_you_want_to_go"
-            android:textAlignment="center"
-            android:inputType="textEmailAddress"
-            android:textSize="24sp"
-            android:focusedByDefault="true"/>
-
-        <ProgressBar
-            android:layout_below="@+id/searchText"
-            android:id="@+id/progressBarCitiesActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:indeterminate="false"
-            android:visibility="invisible" />
-
-        <RelativeLayout
-            android:layout_below="@+id/progressBarCitiesActivity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:id="@+id/CitiesActivityLayout1">
-
-            <ListView
-                android:id="@+id/CitiesActivityCityListView"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            card_view:cardBackgroundColor="#00BCD4">
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"/>
+                android:layout_height="150dp">
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:background="@drawable/profile" />
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Profile"
+                    android:textSize="28sp"
+                    android:textColor="@color/colorWhite"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-        <RelativeLayout
-            android:layout_below="@+id/CitiesActivityLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:id="@+id/CitiesActivityLayout2"
-            android:orientation="vertical">
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/CitiesActivityTextViewTopCities"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#4FC3F7"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Top Cities"
-                android:textColor="#01579B"
-                android:textSize="24dp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:layout_below="@+id/CitiesActivityTextViewTopCities"
-                android:id="@+id/CitiesActivityTopCitiesListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <TextView
-                android:id="@+id/CitiesActivityTextViewEditorsPick"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/CitiesActivityTopCitiesListView"
-                android:layout_marginTop="10dp"
-                android:background="#AED581"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Editor's Pick"
-                android:textColor="#33691E"
-                android:textSize="24dp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:layout_below="@+id/CitiesActivityTextViewEditorsPick"
-                android:id="@+id/CitiesActivityEditorsPickCitiesListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/CitiesActivityTextViewCitiesNearYou"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/CitiesActivityEditorsPickCitiesListView"
-                android:layout_marginTop="10dp"
-                android:background="#FFB74D"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Cities Near You"
-                android:textColor="#E65100"
-                android:textSize="24dp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:layout_below="@+id/CitiesActivityTextViewCitiesNearYou"
-                android:id="@+id/CitiesActivityCitiesNearYouListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"/>
-
-        </RelativeLayout>
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

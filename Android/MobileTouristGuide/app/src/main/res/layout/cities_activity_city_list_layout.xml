@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"
-        android:id="@+id/explore_activity_editors_pick_layout_lanetTextView"/>
+        android:id="@+id/explore_activity_city_list_layout_lanetTextView"/>
 
     <TextView
         android:padding="20dp"
@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="United States of America"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="#818181"/>
 
 </LinearLayout>

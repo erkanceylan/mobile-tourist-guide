@@ -21,6 +21,7 @@ package com.touristguide.mobile.mobiletouristguide;
         import android.widget.ListView;
         import android.widget.ProgressBar;
         import android.widget.RelativeLayout;
+        import android.widget.Toast;
 
 
         import com.touristguide.mobile.mobiletouristguide.Adapters.ExplorerActivityCityListAdapter;
@@ -244,7 +245,7 @@ public class CitiesActivity extends AppCompatActivity  {
         String responseJson=response;
         cityList = JsonToObject.GetCitiesFromJson(responseJson);
         if(cityList.size()!=0){
-            final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.explore_activity_top_cities_layout,R.id.explore_activity_top_cities_layout_lanetTextView, cityList);
+            final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.cities_activity_top_cities_layout,R.id.explore_activity_top_cities_layout_lanetTextView, cityList);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
@@ -265,7 +266,8 @@ public class CitiesActivity extends AppCompatActivity  {
             });
         }
         else{
-            //TODO: Buraya "hiçbir sonuç bulunamadı" şeysi yapılacak
+            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(),"No cities found !",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -277,7 +279,7 @@ public class CitiesActivity extends AppCompatActivity  {
         String responseJson=response;
         topCitiesList = JsonToObject.GetCitiesFromJson(responseJson);
         if(topCitiesList.size()!=0){
-            final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.explore_activity_top_cities_layout,R.id.explore_activity_top_cities_layout_lanetTextView, topCitiesList);
+            final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.cities_activity_top_cities_layout,R.id.explore_activity_top_cities_layout_lanetTextView, topCitiesList);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
@@ -297,9 +299,6 @@ public class CitiesActivity extends AppCompatActivity  {
                 }
             });
         }
-        else{
-            //TODO: Buraya "hiçbir sonuç bulunamadı" şeysi yapılacak
-        }
     }
 
     private void fillTheEditorsPickCities(String response, final ListView cityListView){
@@ -309,7 +308,7 @@ public class CitiesActivity extends AppCompatActivity  {
         String responseJson=response;
         edistorsPickList = JsonToObject.GetCitiesFromJson(responseJson);
         if(edistorsPickList.size()!=0){
-            final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.explore_activity_editors_pick_layout,R.id.explore_activity_editors_pick_layout_lanetTextView, edistorsPickList);
+            final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.cities_activity_editors_pick_layout,R.id.explore_activity_editors_pick_layout_lanetTextView, edistorsPickList);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
@@ -327,9 +326,6 @@ public class CitiesActivity extends AppCompatActivity  {
                     });
                 }
             });
-        }
-        else{
-            //TODO: Buraya "hiçbir sonuç bulunamadı" şeysi yapılacak
         }
     }
 

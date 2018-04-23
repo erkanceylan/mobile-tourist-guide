@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +57,7 @@ public class CountryActivity extends AppCompatActivity {
     private ArrayList<City> cityList;
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView toolbarImageView;
+    private FloatingActionButton fab;
 
     private String countryName;
 
@@ -74,6 +77,15 @@ public class CountryActivity extends AppCompatActivity {
 
         collapsingToolbar=findViewById(R.id.CountryActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.CountryActivityImageView);
+
+        fab = findViewById(R.id.CountryActivityFloatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
     }
     public boolean isOnline(){
@@ -143,13 +155,11 @@ public class CountryActivity extends AppCompatActivity {
                         Intent intent = new Intent(CountryActivity.this, CityActivity.class);
                         intent.putExtra("cityId",cityId);
                         startActivity(intent);
-
                     }
                 });
                 txtPopulation.setText(getPopulationTextWithCommas(String.valueOf(thisCountryObject.getPopulation())));
                 collapsingToolbar.setTitle(thisCountryObject.getName());
                 Log.e("City Size: ", String.valueOf(thisCountryObject.getCities().size()));
-
 
                 String mediaUrl=thisCountryObject.getFlag();
                 Log.e("media flag: ",mediaUrl);
@@ -163,7 +173,7 @@ public class CountryActivity extends AppCompatActivity {
                         StrictMode.setThreadPolicy(policy);
 
 
-                    GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
+                        GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
                         requestBuilder = Glide.with(getApplicationContext())
                                 .using(Glide.buildStreamModelLoader(Uri.class,getApplicationContext()), InputStream.class)
                                 .from(Uri.class)

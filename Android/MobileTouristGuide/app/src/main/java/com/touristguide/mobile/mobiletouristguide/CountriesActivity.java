@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.touristguide.mobile.mobiletouristguide.Adapters.CityActivityPlaceListAdapter;
 import com.touristguide.mobile.mobiletouristguide.Adapters.CountriesActivityCountryListAdapter;
@@ -172,7 +173,8 @@ public class CountriesActivity extends AppCompatActivity {
             });
         }
         else{
-            //TODO: Buraya "hiçbir sonuç bulunamadı" şeysi yapılacak
+            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(),"No country found!",Toast.LENGTH_LONG).show();
         }
     }
 

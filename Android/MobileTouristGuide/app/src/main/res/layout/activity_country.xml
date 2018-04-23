@@ -129,7 +129,6 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-
             <android.support.v7.widget.CardView
                 android:layout_below="@+id/CountryActivityCardViewPopulation"
                 android:id="@+id/CountryActivityCardViewCities"
@@ -161,5 +160,12 @@
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/CountryActivityFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/floating_button_plus"
+        app:backgroundTint="#00BF9A" />
 </android.support.design.widget.CoordinatorLayout>

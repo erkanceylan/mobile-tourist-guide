@@ -20,10 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/where_do_you_want_to_go"
-            android:textAlignment="center"
             android:inputType="textEmailAddress"
-            android:textSize="24sp"
-            android:focusedByDefault="true"/>
+            android:textAlignment="center"
+            android:textColorLink="#265699"
+            android:textSize="24sp" />
 
         <ProgressBar
             android:layout_below="@+id/searchText"
@@ -53,7 +53,7 @@
         <RelativeLayout
             android:layout_below="@+id/CitiesActivityLayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:gravity="center_horizontal"
             android:id="@+id/CitiesActivityLayout2"
             android:orientation="vertical">

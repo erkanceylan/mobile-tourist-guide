@@ -5,6 +5,7 @@ import android.util.Log;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
+import com.touristguide.mobile.mobiletouristguide.Models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -233,5 +234,26 @@ public class JsonToObject {
 
 
         return countries;
+    }
+
+    public static User GetUserFromJson(String json) throws JSONException {
+         String photo, name, email, password;
+         double latitude, longitude;
+         ArrayList<String> plannedTravels=new ArrayList<>();
+
+        JSONObject userObject = new JSONObject(json);
+
+        photo=userObject.getString("photo");
+        name=userObject.getString("name");
+        email=userObject.getString("email");
+        password=userObject.getString("password");
+        latitude=userObject.getDouble("latitude");
+        longitude=userObject.getDouble("longitude");
+        JSONArray plannedTravelsArray=userObject.getJSONArray("plannedTravels");
+
+        for (int i=0; i<plannedTravelsArray.length();i++) {
+            plannedTravels.add(plannedTravelsArray.getString(i));
+        }
+        return new User(photo,name,email,password,latitude,longitude,plannedTravels);
     }
 }

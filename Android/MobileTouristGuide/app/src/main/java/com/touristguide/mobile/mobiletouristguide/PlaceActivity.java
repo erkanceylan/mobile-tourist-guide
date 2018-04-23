@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telecom.Call;
@@ -34,8 +36,8 @@ public class PlaceActivity extends AppCompatActivity {
     private TextView txtCoordinates;
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView toolbarImageView;
-    private LinearLayout markerLinearLayout;
     private LinearLayout categoryLinearLayout;
+    private FloatingActionButton fab;
 
     private Place thisPlaceObject;
     private String placeJson;
@@ -70,26 +72,6 @@ public class PlaceActivity extends AppCompatActivity {
 
         txtCoordinates.setText(String.valueOf(thisPlaceObject.getLatitude())+" , "+String.valueOf(thisPlaceObject.getLongitude()));
 
-        String [] markerArray=thisPlaceObject.getMarker().split(":");
-        for(int x=0;x<markerArray.length;x++) {
-            Log.e("marker: ",markerArray[x]);
-            ImageView image = new ImageView(PlaceActivity.this);
-
-            int id;
-            id = getApplicationContext().getResources().getIdentifier(markerArray[x], "drawable", getPackageName());
-            if(id!=0){
-                image.setBackgroundResource(id);
-
-                final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
-                int pixels = (int) (40 * scale + 0.5f);
-
-                markerLinearLayout.addView(image);
-                image.getLayoutParams().width= RelativeLayout.LayoutParams.WRAP_CONTENT;
-                image.getLayoutParams().height=pixels;
-                image.requestLayout();
-            }
-        }
-
         for (String category: thisPlaceObject.getCategories()){
             Log.e("category: ",category);
             TextView tv=new TextView(PlaceActivity.this);
@@ -109,7 +91,6 @@ public class PlaceActivity extends AppCompatActivity {
                     mediaJson+="\""+media+"\"";
                 else
                     mediaJson+="\""+media+"\""+",";
-
             }
             mediaJson+="]";
             Log.e("sss",mediaJson);
@@ -120,7 +101,6 @@ public class PlaceActivity extends AppCompatActivity {
                     Intent intent = new Intent(PlaceActivity.this, ImageSlider.class);
                     intent.putExtra("mediaJson", finalMediaJson);
                     startActivity(intent);
-                    //fullScreen();
                 }
             });
             String mediaUrl=thisPlaceObject.getMedia().get(0);
@@ -151,13 +131,15 @@ public class PlaceActivity extends AppCompatActivity {
         txtCoordinates=findViewById(R.id.txtPlaceActivityCoordinates);
         collapsingToolbar=findViewById(R.id.PlaceActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.PlaceActivityImageView);
-        markerLinearLayout=findViewById(R.id.linearLayoutPlaceActivityMarkers);
         categoryLinearLayout=findViewById(R.id.linearLayoutPlaceActivityCategories);
-    }
 
-    public void fullScreen() {
-
-
-
+        fab = findViewById(R.id.PlaceActivityFloatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 }

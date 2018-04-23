@@ -18,8 +18,11 @@
 
     <Button
         android:id="@+id/SignupActivityAddPhotoButton"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_shape2"
+        android:textColor="@color/colorWhite"
         android:text="Add a photo"/>
 
     <TextView
@@ -33,12 +36,16 @@
         android:id="@+id/SignupActivityEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Your name"/>
+        android:hint="Your name"
+        android:maxLines="1"
+        android:singleLine="true"/>
     <Button
+        android:background="@drawable/button_shape"
         android:id="@+id/SignupActivityContunieButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Contunie"
+        android:textColor="@color/colorWhite"
         android:enabled="false"/>
 
 </LinearLayout>

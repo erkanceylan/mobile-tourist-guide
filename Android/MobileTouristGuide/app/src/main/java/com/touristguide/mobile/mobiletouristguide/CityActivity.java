@@ -21,6 +21,7 @@ import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
+import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 
 import org.json.JSONException;
 
@@ -197,6 +198,7 @@ public class CityActivity extends AppCompatActivity {
                 {
                     progressBar.setVisibility(View.INVISIBLE);
                     placesListView.setAdapter(adapter);
+                    ListUtils.setDynamicHeight(placesListView);
                     placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -210,7 +212,13 @@ public class CityActivity extends AppCompatActivity {
             });
         }
         else{
-            //TODO: Buraya "hiçbir sonuç bulunamadı" şeysi yapılacak
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getApplicationContext(),"No place found!",Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
 
