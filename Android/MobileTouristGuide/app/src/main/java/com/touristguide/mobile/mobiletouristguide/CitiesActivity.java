@@ -82,7 +82,8 @@ public class CitiesActivity extends AppCompatActivity  {
         searchText.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-                progressBar.setVisibility(View.VISIBLE);
+
+                SetVisibity(progressBar,true);
 
                 String searchingText=searchText.getText().toString();
                 if(searchingText!="" && searchingText!=null && !searchingText.isEmpty()){
@@ -156,13 +157,7 @@ public class CitiesActivity extends AppCompatActivity  {
         dialog.show();
     }
     private void getSuggestionCities(){
-        progressBar.setVisibility(View.VISIBLE);
-        final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
-        int pixels = (int) (0 * scale + 0.5f);
-
-        layout1.getLayoutParams().height = pixels;
-
-        layout2.getLayoutParams().height=RelativeLayout.LayoutParams.MATCH_PARENT;
+        SetVisibity(progressBar,true);
 
         if(isOnline()){
             try {
@@ -176,7 +171,10 @@ public class CitiesActivity extends AppCompatActivity  {
                     public void onResponse(Call call, final Response response) throws IOException {
 
                         try {
-
+                            final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+                            int pixels = (int) (0 * scale + 0.5f);
+                            layout1.getLayoutParams().height = pixels;
+                            layout2.getLayoutParams().height=RelativeLayout.LayoutParams.MATCH_PARENT;
                             fillTheTopCities(response.body().string(),topCityListView);
 
                             //responseView.setText(response.body().string());
@@ -230,7 +228,19 @@ public class CitiesActivity extends AppCompatActivity  {
         }
         return true;
     }
-
+    private void SetVisibity(View view, boolean isVisible){
+        if(isVisible){
+            progressBar.setVisibility(View.VISIBLE);
+            view.getLayoutParams().height= RelativeLayout.LayoutParams.WRAP_CONTENT;
+        }
+        else{
+            progressBar.setVisibility(View.INVISIBLE);
+            final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+            int pixels;
+            pixels = (int) (0 * scale + 0.5f);
+            view.getLayoutParams().height=pixels;
+        }
+    }
     public boolean isOnline(){
         ConnectivityManager cm =(ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -249,7 +259,7 @@ public class CitiesActivity extends AppCompatActivity  {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
-                    progressBar.setVisibility(View.INVISIBLE);
+                    SetVisibity(progressBar,false);
                     cityListView.setAdapter(adapter);
                     ListUtils.setDynamicHeight(cityListView);
                     cityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -266,7 +276,7 @@ public class CitiesActivity extends AppCompatActivity  {
             });
         }
         else{
-            progressBar.setVisibility(View.INVISIBLE);
+            SetVisibity(progressBar,false);
             Toast.makeText(getApplicationContext(),"No cities found !",Toast.LENGTH_LONG).show();
         }
     }
@@ -283,7 +293,7 @@ public class CitiesActivity extends AppCompatActivity  {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run(){
-                    progressBar.setVisibility(View.INVISIBLE);
+                    SetVisibity(progressBar,false);
                     cityListView.setAdapter(adapter);
                     ListUtils.setDynamicHeight(cityListView);
                     cityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

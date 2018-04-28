@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.User;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
+import com.touristguide.mobile.mobiletouristguide.Utils.SharedPreferencesUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -168,40 +169,44 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void processTheResponse(final String response) throws JSONException {
-        JSONObject responseObject = new JSONObject(response);
-
-        final String responseText= responseObject.getString("response");
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 showProgress(false);
-                Log.e("responseText:",responseText);
             }
         });
-        if(responseText==null){
-            User user= JsonToObject.GetUserFromJson(response);
-            //TODO: Kullanıcı SQLite veritabanına kayıt edilecek.
-            Intent intent = new Intent(LoginActivity.this, ExploreActivity.class);
-            startActivity(intent);
-        }
-        else{
-            if(responseText.equals("user not found!")){
+
+        JSONObject responseObject = new JSONObject(response);
+
+        if(responseObject.has("response")){
+            final String failureText= responseObject.getString("response");
+            if(failureText.equals("user not found!")){
+
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 intent.putExtra("email",mEmailView.getText().toString());
                 intent.putExtra("password",mPasswordView.getText().toString());
                 startActivity(intent);
             }
-            else{
+            else if(failureText.equals("password is not correct!")){
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mPasswordView.setError(responseText);
+                        mPasswordView.setError(failureText);
                     }
                 });
 
             }
+        }
+        else{
+            User user = JsonToObject.GetUserFromJson(response);
+            Log.e("log:",user.getName());
+            Log.e("log:",user.getEmail());
+            Log.e("log:",user.getPassword());
 
+            SharedPreferencesUtils.SaveUser(getApplicationContext(),user.getName(),user.getEmail(),user.getPassword());
+            Intent intent = new Intent(LoginActivity.this, ExploreActivity.class);
+            startActivity(intent);
         }
 
     }

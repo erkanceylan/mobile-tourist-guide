@@ -2,7 +2,9 @@ package com.touristguide.mobile.mobiletouristguide;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +17,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
+import com.touristguide.mobile.mobiletouristguide.Utils.SharedPreferencesUtils;
+
+import org.json.JSONException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -25,7 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button addPhotoButton;
     private Button contunieButton;
     public static final int GET_FROM_GALLERY = 3;
-    private String userEmail, userPassword;
+    private String userEmail, userPassword, userFilePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +56,19 @@ public class SignupActivity extends AppCompatActivity {
         //Detects request codes
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String filePath = cursor.getString(columnIndex);
+            userFilePath=filePath;
+            cursor.close();
+
+
+            Bitmap bitmap = null;//BitmapFactory.decodeFile(filePath);
+
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                 imageView.setImageBitmap(bitmap);
@@ -75,9 +98,34 @@ public class SignupActivity extends AppCompatActivity {
         contunieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO : Update Profile : POST method, URL: /api/users/ fotoğraf hariç
-                //TODO: User bilgileri SharedPreferences a kaydedilecek.
-                Log.e("USER: ",userEmail+" "+userPassword);
+                // TODO : Signup Profile : POST method, URL: /api/users/ fotoğraf hariç
+                final String email=userEmail;
+                final String password=userPassword;
+                final String photoUrl=userFilePath;
+                final String name=editText.getText().toString();
+                //TODO: Fotograf uygulamaya kaydedilecek ve ordaki linki kaydedilecek
+                try {
+                    ApiRequests.POST("users/", new Callback() {
+                        @Override
+                        public void onFailure(Call call, final IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.e("error:", "burda patladi");
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(Call call, final Response response) throws IOException {
+                            SharedPreferencesUtils.SaveUser(getApplicationContext(),name,email,password,photoUrl);
+                            Intent intent=new Intent(SignupActivity.this, ExploreActivity.class);
+                            startActivity(intent);
+                        }
+                    }, name, email, password);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         editText.addTextChangedListener(new TextWatcher() {

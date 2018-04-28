@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import com.touristguide.mobile.mobiletouristguide.Adapters.CityActivityPlaceList
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
+import com.touristguide.mobile.mobiletouristguide.Utils.JourneyDatePickerDialog;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
 import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 
@@ -39,6 +42,7 @@ public class CityActivity extends AppCompatActivity {
     private TextView txtCountryName;
     private ListView placesListView;
     private ProgressBar progressBar;
+    private FloatingActionButton fab;
 
     private City cityObject;
     private ArrayList<Place> placesList;
@@ -62,6 +66,17 @@ public class CityActivity extends AppCompatActivity {
         placesListView=findViewById(R.id.listViewCityActivityPlaces);
         progressBar=findViewById(R.id.progressBarCityActivity);
         progressBar.setVisibility(View.VISIBLE);
+        fab = findViewById(R.id.CityActivityFloatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JourneyDatePickerDialog dialog=new JourneyDatePickerDialog(CityActivity.this, getApplicationContext());
+                dialog.showDatePicker();
+
+                //Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+            }
+        });
     }
     private void getCityObjectFromCityId(){
         /* istek yapılıyor */
@@ -81,7 +96,6 @@ public class CityActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 });
             } catch (Exception e) {
@@ -139,8 +153,6 @@ public class CityActivity extends AppCompatActivity {
 
         //Place 'leri getirelim.
         /* istek yapılıyor */
-
-
         if(isOnline()){
             try {
                 ApiRequests.GET("places/city/" + cityId, new Callback() {
@@ -152,16 +164,13 @@ public class CityActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
 
+                        try {
 
-                                try {
+                            fillThePlaces(response.body().string());
 
-                                   fillThePlaces(response.body().string());
-
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             } catch (Exception e) {
@@ -169,7 +178,6 @@ public class CityActivity extends AppCompatActivity {
             }
         }
         else{
-            Log.d("*********","THERE IS NO INTERNET CONNECTION");
             AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
 
             // 2. Chain together various setter methods to set the dialog characteristics
@@ -189,7 +197,7 @@ public class CityActivity extends AppCompatActivity {
         String responseJson=response;
         placesList = JsonToObject.GetPlacesFromJson(responseJson);
         placesJsonList = JsonToObject.GetPlacesJsonListFromJson(responseJson);
-       // Log.i("## Place list:",String.valueOf(placesList.size()));
+
         if(placesList.size()!=0){
             final CityActivityPlaceListAdapter adapter=new CityActivityPlaceListAdapter(this,R.layout.city_activity_place_list_layout,R.id.city_activity_place_list_layout_lanetTextView, placesList);
             runOnUiThread(new Runnable() {
@@ -198,7 +206,7 @@ public class CityActivity extends AppCompatActivity {
                 {
                     progressBar.setVisibility(View.INVISIBLE);
                     placesListView.setAdapter(adapter);
-                    ListUtils.setDynamicHeight(placesListView);
+                    //ListUtils.setDynamicHeight(placesListView);
                     placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id)

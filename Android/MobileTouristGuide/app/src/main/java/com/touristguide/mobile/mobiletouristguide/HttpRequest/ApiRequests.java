@@ -36,9 +36,17 @@ public class ApiRequests
     }
 
     public static void POST(String queryString, final Callback callback, String ... params) throws Exception{
-        String json="{\"email\":\""+params[0]+"\",\"password\":\""+params[1]+"\"}";
+        String json="{}";
+        Log.e("params.length: ",String.valueOf(params.length));
+        if(params.length==2){
+            json="{\"email\":\""+params[0]+"\",\"password\":\""+params[1]+"\"}";
+        }
+        else if(params.length==3){
+            json="{\"name\":\""+params[0]+"\",\"email\":\""+params[1]+"\",\"password\":\""+params[2]+"\"}";
+        }
+
         OkHttpClient client = new OkHttpClient();
-        Log.e("params: ",params[0]+" * "+params[1]);
+
         Log.e("apirequest: ",ServerUrl+queryString);
         RequestBody requestBody = RequestBody.create(JSON, json);
         Request request=new Request.Builder().url(ServerUrl+queryString).post(requestBody).build();
@@ -50,14 +58,8 @@ public class ApiRequests
             }
 
             @Override public void onResponse(Call call, Response response) throws IOException {
-                //response 200(OK!) değilse on response a degilde on failure e düşsün.
-               // if(response.code() == 200)
-                    callback.onResponse(call, response);
-               // else{
-                //    Log.e("e","1");
-                  //  callback.onFailure(call, new IOException());
-                //}
 
+                    callback.onResponse(call, response);
             }
         });
     }

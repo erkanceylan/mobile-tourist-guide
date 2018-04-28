@@ -8,6 +8,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.touristguide.mobile.mobiletouristguide.Models.User;
+import com.touristguide.mobile.mobiletouristguide.Utils.SharedPreferencesUtils;
+
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -27,9 +30,17 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run()
             {
-                Intent mainIntent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(mainIntent);
-                finish();
+                User user= SharedPreferencesUtils.GetUser(getApplicationContext());
+                if(user.getEmail()=="DEFAULT"){
+                    Intent exploreIntent = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(exploreIntent);
+                    finish();
+                }
+                else{
+                    Intent exploreIntent = new Intent(getApplicationContext(),ExploreActivity.class);
+                    startActivity(exploreIntent);
+                    finish();
+                }
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

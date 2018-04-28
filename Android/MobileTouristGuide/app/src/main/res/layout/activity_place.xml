@@ -81,10 +81,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center_horizontal"
+                        android:background="#64dd17"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
                         android:text="City - Country"
-                        android:textSize="18sp"/>
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/txtPlaceActivityCityCountryName"
                         android:layout_width="match_parent"
@@ -104,13 +109,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center_horizontal"
+                        android:background="#4fc3f7"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
                         android:text="@string/description"
-                        android:textSize="18sp"/>
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtPlaceLongDescription"
@@ -136,10 +146,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center_horizontal"
+                        android:background="#ea80fc"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
                         android:text="@string/coordinates"
-                        android:textSize="18sp"/>
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/txtPlaceActivityCoordinates"
                         android:layout_width="match_parent"
@@ -162,10 +177,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:gravity="center_horizontal"
+                        android:background="#ef5350"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
                         android:text="@string/categories"
-                        android:textSize="18sp"/>
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
 
                     <LinearLayout
                         android:id="@+id/linearLayoutPlaceActivityCategories"
@@ -193,14 +213,5 @@
 
 
     </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/PlaceActivityFloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:src="@drawable/floating_button_plus"
-        app:backgroundTint="#00BF9A" />
 
 </android.support.design.widget.CoordinatorLayout>

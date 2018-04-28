@@ -203,8 +203,8 @@ app.post('/api/users/',(req,res)=>{
         photo: null,
         email: req.body.email,
         password: req.body.password,
-        latitude: null,
-        longitude:null,
+        latitude: 0,
+        longitude:0,
         plannedTravels: []
     });
 

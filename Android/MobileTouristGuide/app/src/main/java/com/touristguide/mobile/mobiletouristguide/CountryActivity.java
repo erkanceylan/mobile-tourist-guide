@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
@@ -30,6 +31,7 @@ import com.touristguide.mobile.mobiletouristguide.Adapters.CountryActivityCityLi
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
+import com.touristguide.mobile.mobiletouristguide.Utils.JourneyDatePickerDialog;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
 import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 import com.touristguide.mobile.mobiletouristguide.Utils.SvgDecoder;
@@ -82,8 +84,10 @@ public class CountryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                JourneyDatePickerDialog dialog=new JourneyDatePickerDialog(CountryActivity.this, getApplicationContext());
+                dialog.showDatePicker();
+                //Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
             }
         });
 
@@ -266,7 +270,7 @@ public class CountryActivity extends AppCompatActivity {
             });
         }
         else{
-            //TODO: Buraya "hiçbir sonuç bulunamadı" şeysi yapılacak
+            Toast.makeText(getApplicationContext(),"No city found!",Toast.LENGTH_LONG).show();
         }
 
 

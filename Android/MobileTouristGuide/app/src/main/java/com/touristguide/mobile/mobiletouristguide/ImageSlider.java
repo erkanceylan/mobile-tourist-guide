@@ -27,7 +27,7 @@ public class ImageSlider extends AppCompatActivity {
         setContentView(R.layout.activity_image_slider);
         init();
         mediaJson = getIntent().getStringExtra("mediaJson");
-        Log.e("mediaJson: ",mediaJson);
+
         try {
             media= JsonToObject.GetMediaFromJson(mediaJson);
         } catch (JSONException e) {

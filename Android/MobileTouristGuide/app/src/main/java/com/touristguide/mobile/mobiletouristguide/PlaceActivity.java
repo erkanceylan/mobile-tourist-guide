@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -37,7 +38,7 @@ public class PlaceActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView toolbarImageView;
     private LinearLayout categoryLinearLayout;
-    private FloatingActionButton fab;
+    private Button showInMapButton;
 
     private Place thisPlaceObject;
     private String placeJson;
@@ -46,7 +47,6 @@ public class PlaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
         placeJson = getIntent().getStringExtra("placeJson");
-        Log.e("Place Json: ",placeJson);
         init();
         getPlaceObjectFromPlaceJson();
     }
@@ -71,6 +71,17 @@ public class PlaceActivity extends AppCompatActivity {
         }
 
         txtCoordinates.setText(String.valueOf(thisPlaceObject.getLatitude())+" , "+String.valueOf(thisPlaceObject.getLongitude()));
+
+        showInMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlaceActivity.this, MapsActivity.class);
+                intent.putExtra("latitude",thisPlaceObject.getLatitude());
+                intent.putExtra("longitude",thisPlaceObject.getLongitude());
+                intent.putExtra("name",thisPlaceObject.getName());
+                startActivity(intent);
+            }
+        });
 
         for (String category: thisPlaceObject.getCategories()){
             Log.e("category: ",category);
@@ -132,14 +143,6 @@ public class PlaceActivity extends AppCompatActivity {
         collapsingToolbar=findViewById(R.id.PlaceActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.PlaceActivityImageView);
         categoryLinearLayout=findViewById(R.id.linearLayoutPlaceActivityCategories);
-
-        fab = findViewById(R.id.PlaceActivityFloatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        showInMapButton=findViewById(R.id.PlaceActivityShowInMapButton);
     }
 }
