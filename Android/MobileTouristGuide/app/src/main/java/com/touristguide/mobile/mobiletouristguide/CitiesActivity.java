@@ -15,6 +15,7 @@ package com.touristguide.mobile.mobiletouristguide;
         import android.text.TextWatcher;
         import android.util.Log;
         import android.view.View;
+        import android.view.ViewGroup;
         import android.view.WindowManager;
         import android.widget.AdapterView;
         import android.widget.EditText;
@@ -228,18 +229,23 @@ public class CitiesActivity extends AppCompatActivity  {
         }
         return true;
     }
-    private void SetVisibity(View view, boolean isVisible){
+    private void SetVisibity(final View view, boolean isVisible){
         if(isVisible){
-            progressBar.setVisibility(View.VISIBLE);
-            view.getLayoutParams().height= RelativeLayout.LayoutParams.WRAP_CONTENT;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("visible","true");
+                    view.setVisibility(View.VISIBLE);
+                }
+            });
+
         }
-        else{
-            progressBar.setVisibility(View.INVISIBLE);
-            final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
-            int pixels;
-            pixels = (int) (0 * scale + 0.5f);
-            view.getLayoutParams().height=pixels;
-        }
+        else runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                view.setVisibility(View.INVISIBLE);
+            }
+        });
     }
     public boolean isOnline(){
         ConnectivityManager cm =(ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -251,7 +257,6 @@ public class CitiesActivity extends AppCompatActivity  {
     private void fillTheCities(String response, final ListView cityListView){
 
         cityList=null;
-
         String responseJson=response;
         cityList = JsonToObject.GetCitiesFromJson(responseJson);
         if(cityList.size()!=0){
@@ -260,6 +265,7 @@ public class CitiesActivity extends AppCompatActivity  {
                 @Override
                 public void run(){
                     SetVisibity(progressBar,false);
+                    SetVisibity(cityListView,true);
                     cityListView.setAdapter(adapter);
                     ListUtils.setDynamicHeight(cityListView);
                     cityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -277,7 +283,14 @@ public class CitiesActivity extends AppCompatActivity  {
         }
         else{
             SetVisibity(progressBar,false);
-            Toast.makeText(getApplicationContext(),"No cities found !",Toast.LENGTH_LONG).show();
+            SetVisibity(cityListView,false);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(),"No cities found !",Toast.LENGTH_LONG).show();
+                }
+            });
+
         }
     }
 

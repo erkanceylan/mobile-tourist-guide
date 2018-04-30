@@ -1,5 +1,6 @@
 package com.touristguide.mobile.mobiletouristguide;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -22,9 +23,7 @@ import com.touristguide.mobile.mobiletouristguide.Adapters.CityActivityPlaceList
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
-import com.touristguide.mobile.mobiletouristguide.Utils.JourneyDatePickerDialog;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
-import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 
 import org.json.JSONException;
 
@@ -35,7 +34,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class CityActivity extends AppCompatActivity {
+public class CityActivity extends Activity {
 
     private LinearLayout mainLinearLayout;
     private TextView txtCityName;
@@ -70,8 +69,11 @@ public class CityActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JourneyDatePickerDialog dialog=new JourneyDatePickerDialog(CityActivity.this, getApplicationContext());
-                dialog.showDatePicker();
+
+                Intent intent = new Intent(CityActivity.this, CreateTripActivity.class);
+                intent.putExtra("locationName",cityObject.getName());
+                intent.putExtra("locationId",cityObject.getCityId());
+                startActivity(intent);
 
                 //Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
@@ -205,6 +207,9 @@ public class CityActivity extends AppCompatActivity {
                 public void run()
                 {
                     progressBar.setVisibility(View.INVISIBLE);
+                    final float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+                    int pixels = (int) (0 * scale + 0.5f);
+                    progressBar.getLayoutParams().height = pixels;
                     placesListView.setAdapter(adapter);
                     //ListUtils.setDynamicHeight(placesListView);
                     placesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

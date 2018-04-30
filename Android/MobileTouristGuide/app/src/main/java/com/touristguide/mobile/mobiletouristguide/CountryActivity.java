@@ -31,7 +31,6 @@ import com.touristguide.mobile.mobiletouristguide.Adapters.CountryActivityCityLi
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
-import com.touristguide.mobile.mobiletouristguide.Utils.JourneyDatePickerDialog;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
 import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 import com.touristguide.mobile.mobiletouristguide.Utils.SvgDecoder;
@@ -84,8 +83,11 @@ public class CountryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JourneyDatePickerDialog dialog=new JourneyDatePickerDialog(CountryActivity.this, getApplicationContext());
-                dialog.showDatePicker();
+                Intent intent = new Intent(CountryActivity.this, CreateTripActivity.class);
+                intent.putExtra("locationName",thisCountryObject.getName());
+                intent.putExtra("locationId",thisCountryObject.getCountryId());
+                startActivity(intent);
+
                 //Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
             }
