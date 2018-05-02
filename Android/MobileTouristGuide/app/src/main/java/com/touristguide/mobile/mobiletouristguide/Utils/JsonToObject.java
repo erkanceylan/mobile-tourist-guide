@@ -5,15 +5,20 @@ import android.util.Log;
 import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.Country;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
+import com.touristguide.mobile.mobiletouristguide.Models.PlannedTravels;
 import com.touristguide.mobile.mobiletouristguide.Models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class JsonToObject {
@@ -104,6 +109,44 @@ public class JsonToObject {
 
         return places;
     }
+
+    public static ArrayList<PlannedTravels> GetPlannedTravelsFromJson(String json) {
+        ArrayList<PlannedTravels> plannedTravels=new ArrayList<PlannedTravels>();
+
+        String userEmail,tripName,locationName,locationId;
+        Calendar startingDate = Calendar.getInstance();
+        Calendar finishingDate = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("y-M-d", Locale.ENGLISH);
+
+        try
+        {
+            JSONObject plannedTravelsJsonObject=new JSONObject(json);
+            JSONArray tripList = plannedTravelsJsonObject.getJSONArray("plannedTravels");
+            for (int i=0; i<tripList.length();i++)
+            {
+                JSONObject tripObject=tripList.getJSONObject(i);
+                userEmail=tripObject.getString("email");
+                tripName=tripObject.getString("tripName");
+                locationName=tripObject.getString("locationName");
+                locationId=tripObject.getString("locationId");
+                startingDate.setTime(sdf.parse(tripObject.getString("tripStartingDate")));
+                finishingDate.setTime(sdf.parse(tripObject.getString("tripFinishingDate")));
+
+                Log.e("Planned Travel: ",tripName+" - "+locationId);
+                plannedTravels.add(new PlannedTravels(userEmail, startingDate, finishingDate, tripName, locationName, locationId));
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return plannedTravels;
+    }
+
 
     public static ArrayList<String> GetPlacesJsonListFromJson(String json){
         ArrayList<String> places=new ArrayList<String>();

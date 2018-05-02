@@ -59,8 +59,8 @@ public class ImageSliderActivityViewPagerAdapter extends PagerAdapter {
 
                 Picasso.with(this.context)
                         .load(mediaUrl)
-                        .placeholder(R.drawable.default_place)
-                        .error(R.drawable.default_place)
+                        .placeholder(R.drawable.image_loading)
+                        .error(R.drawable.no_image)
                         .into(imageView);
             }
         }

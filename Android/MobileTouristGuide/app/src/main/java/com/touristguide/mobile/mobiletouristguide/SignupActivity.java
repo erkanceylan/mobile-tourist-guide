@@ -98,7 +98,6 @@ public class SignupActivity extends AppCompatActivity {
         contunieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO : Signup Profile : POST method, URL: /api/users/ fotoğraf hariç
                 final String email=userEmail;
                 final String password=userPassword;
                 final String photoUrl=userFilePath;

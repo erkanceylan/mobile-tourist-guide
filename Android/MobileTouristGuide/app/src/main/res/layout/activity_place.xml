@@ -17,7 +17,7 @@
             android:id="@+id/PlaceActivityCollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg1"
+            android:background="@drawable/image_loading"
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"

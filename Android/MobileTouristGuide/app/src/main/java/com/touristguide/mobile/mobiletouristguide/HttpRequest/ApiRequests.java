@@ -5,7 +5,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.touristguide.mobile.mobiletouristguide.Models.PlannedTravels;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import okhttp3.*;
 
@@ -60,6 +63,37 @@ public class ApiRequests
             @Override public void onResponse(Call call, Response response) throws IOException {
 
                     callback.onResponse(call, response);
+            }
+        });
+    }
+
+
+    public static void PUT(String queryString, final Callback callback, PlannedTravels params) throws Exception{
+        String json="{}";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("y-M-d");
+        String startingDate=dateFormatter.format(params.getStartingDate().getTime());
+        String finishingDate=dateFormatter.format(params.getFinishingDate().getTime());
+        json="{\"plannedTravels\":{\"email\":\""+params.getUserEmail()+"\",\"tripStartingDate\":\""+startingDate+"\",\"tripFinishingDate\":\""+finishingDate+"\",\"tripName\":\""+params.getTripName()+"\",\"locationName\":\""+params.getLocationName()+"\",\"locationId\":\""+params.getCityOrCountryId()+"\"}}";
+
+        OkHttpClient client = new OkHttpClient();
+
+        Log.e("apirequest: ",ServerUrl+queryString);
+        Log.e("json: ", json);
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        Request request=new Request.Builder()
+                .url(ServerUrl+queryString)
+                .put(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Call call, IOException e) {
+                Log.e("e","0 "+e.getMessage());
+                callback.onFailure(call, e);
+            }
+
+            @Override public void onResponse(Call call, Response response) throws IOException {
+
+                callback.onResponse(call, response);
             }
         });
     }

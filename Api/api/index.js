@@ -154,6 +154,14 @@ app.get('/api/places/:idType/:id',(req,res)=>{
     }
 });
 
+app.get('/api/users/:email',(req,res)=>{
+    UserModel.findOne({email: req.params.email}).exec((err,user)=>{
+        if(err) throw err;
+    
+        res.send(user);
+    });
+});
+
 //LOGIN
 app.post('/api/login/',(req,res)=>{
     const schema={
@@ -216,11 +224,8 @@ app.post('/api/users/',(req,res)=>{
     });
 });
 //UPDATE USER - Kullanıcı Güncelleme
-app.put('/api/users/:id',(req,res)=>{
+app.put('/api/users/:email',(req,res)=>{
     const schema={
-        name: joi.string().min(3).required(),
-        email: joi.string().min(3).required(),
-        password: joi.string().min(3).required(),
         plannedTravels: joi.required()
     };
 
@@ -230,18 +235,21 @@ app.put('/api/users/:id',(req,res)=>{
         return;
     }
 
-    UserModel.findOneAndUpdate({_id: req.params.id},{$set:{
-        name:req.body.name,
-        email:req.body.email,
-        password:req.body.password,
-        photo:req.body.photo,
-        langitude:req.body.langitude,
-        longitude:req.body.longitude,
-        plannedTravels:req.body.plannedTravels
-    }},{upsert: true},(err,user)=>{
-        if(err) throw err;   
-        res.status(204);
+    var usersPlannedTravels=[];
+    UserModel.findOne({email: req.params.email}).exec((err,user)=>{
+    
+        usersPlannedTravels=user.plannedTravels;
+
+        usersPlannedTravels.push(req.body.plannedTravels);
+
+        UserModel.findOneAndUpdate({email: req.params.email},{$set:{
+            plannedTravels:usersPlannedTravels
+        }},{upsert: true},(err,user)=>{
+            if(err) throw err;   
+            res.status(200).send(user);
+        });
     });
+
 });
 
 const port = process.env.PORT || 8080;

@@ -126,8 +126,8 @@ public class PlaceActivity extends AppCompatActivity {
 
                     Picasso.with(getApplicationContext())
                             .load(mediaUrl)
-                            .placeholder(R.drawable.default_place)
-                            .error(R.drawable.default_place)
+                            .placeholder(R.drawable.image_loading)
+                            .error(R.drawable.no_image)
                             .into(toolbarImageView);
                 }
             }
