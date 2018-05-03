@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
 import com.touristguide.mobile.mobiletouristguide.Utils.ListUtils;
 import com.touristguide.mobile.mobiletouristguide.Utils.SharedPreferencesUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -110,8 +113,16 @@ public class ProfileActivity extends AppCompatActivity {
     private void fillProfileActivityWithUserData(){
         nameTextView.setText(user.getName());
         //TODO: Foto ayarlanacak.
-        Bitmap bitmap = BitmapFactory.decodeFile(user.getPhoto());
-        photoImageView.setImageBitmap(bitmap);
+
+        if(!user.getPhoto().equals("DEFAULT"))
+        {
+            File imgFile = new  File(user.getPhoto());
+
+            if(imgFile.exists()){
+
+                photoImageView.setImageURI(Uri.fromFile(imgFile));
+            }
+        }
     }
 
     private void fillPlannedTravels(String response){

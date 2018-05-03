@@ -35,7 +35,7 @@ public class SharedPreferencesUtils {
         name=preferences.getString("name","DEFAULT");
         email=preferences.getString("email","DEFAULT");
         password=preferences.getString("password","DEFAULT");
-        imageUrl=preferences.getString("imageUrl","DEFAULT");
+        imageUrl=preferences.getString("userPhotoPath","DEFAULT");
 
         return new User(imageUrl,name,email,password,0,0,null);
     }

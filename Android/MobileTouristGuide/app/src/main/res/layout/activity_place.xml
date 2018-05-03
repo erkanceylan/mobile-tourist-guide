@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlaceActivity"
-    android:background="#fcfcfc">
+    android:background="#FFCFD8DC">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/PlaceActivityAppbar"

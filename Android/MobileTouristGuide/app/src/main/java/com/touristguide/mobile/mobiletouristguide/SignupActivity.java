@@ -1,11 +1,14 @@
 package com.touristguide.mobile.mobiletouristguide;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,14 +25,19 @@ import com.touristguide.mobile.mobiletouristguide.Utils.SharedPreferencesUtils;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class SignupActivity extends AppCompatActivity {
+
+
+    private String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     private ImageView imageView;
     private EditText editText;
@@ -48,10 +56,10 @@ public class SignupActivity extends AppCompatActivity {
         init();
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         //Detects request codes
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
@@ -63,15 +71,43 @@ public class SignupActivity extends AppCompatActivity {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String filePath = cursor.getString(columnIndex);
+            Log.e("filePath: ",filePath);
             userFilePath=filePath;
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putString("userPhotoPath", filePath).apply();
             cursor.close();
 
 
-            Bitmap bitmap = null;//BitmapFactory.decodeFile(filePath);
+            //String path = Environment.getExternalStorageDirectory()+ filePath;
+            //File imgFile = new File(path);
+            /*
+            if(imgFile.exists()){
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ImageView imageView=(ImageView)findViewById(R.id.imageView);
+                imageView.setImageBitmap(myBitmap);
+            }
+            */
 
+
+
+            File imgFile = new  File(filePath);
+
+            if(imgFile.exists()){
+                Log.e("exist","true");
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                //imageView.setImageBitmap(myBitmap);
+                imageView.setImageURI(Uri.fromFile(imgFile));
+            }
+            else{
+                Log.e("exist","false");
+            }
+//            imageView.setImageBitmap(BitmapFactory.decodeFile(filePath));
+
+/*
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                imageView.setImageBitmap(bitmap);
+               // Bitmap bitmap;
+               // bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+               // imageView.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -79,6 +115,7 @@ public class SignupActivity extends AppCompatActivity {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            */
         }
     }
 
@@ -91,7 +128,13 @@ public class SignupActivity extends AppCompatActivity {
         addPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+
+                if (EasyPermissions.hasPermissions(getApplicationContext(), galleryPermissions)) {
+                    startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                } else {
+                    EasyPermissions.requestPermissions(this, "Access for storage",
+                            101, galleryPermissions);
+                }
             }
         });
 

@@ -8,7 +8,7 @@
     tools:context=".ImageSlider"
     android:padding="10dp"
     android:layout_gravity="center"
-    android:background="#fcfcfc">
+    android:background="#FFCFD8DC">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/ImageSliderViewPager"

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.squareup.picasso.Picasso;
 import com.touristguide.mobile.mobiletouristguide.R;
 
@@ -56,6 +57,8 @@ public class ImageSliderActivityViewPagerAdapter extends PagerAdapter {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                         .permitAll().build();
                 StrictMode.setThreadPolicy(policy);
+
+                PhotoViewAttacher yourAttacher = new PhotoViewAttacher(imageView);
 
                 Picasso.with(this.context)
                         .load(mediaUrl)
