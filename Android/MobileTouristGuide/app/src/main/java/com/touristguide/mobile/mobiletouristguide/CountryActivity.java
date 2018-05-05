@@ -94,12 +94,6 @@ public class CountryActivity extends AppCompatActivity {
         });
 
     }
-    public boolean isOnline(){
-        ConnectivityManager cm =(ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        boolean connection=netInfo != null && netInfo.isConnectedOrConnecting();
-        return connection;
-    }
 
     private void getCountryObjectFromCountryName(){
         /* istek yapılıyor */
@@ -123,20 +117,30 @@ public class CountryActivity extends AppCompatActivity {
             }
         }
         else{
-            Log.d("*********","THERE IS NO INTERNET CONNECTION");
-            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage(getResources().getString(R.string.internet_connection_alert))
-                    .setTitle(getResources().getString(R.string.internet_connection_alert_title));
-            // 3. Get the AlertDialog from create()
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            InternetConnectionError();
         }
-
-
         /* istek bitişi */
+    }
 
+    public boolean isOnline(){
+
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void InternetConnectionError(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getResources().getString(R.string.internet_connection_alert))
+                .setTitle(getResources().getString(R.string.internet_connection_alert_title));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void fillTheCountryData(final String response){
@@ -272,6 +276,7 @@ public class CountryActivity extends AppCompatActivity {
             });
         }
         else{
+
             Toast.makeText(getApplicationContext(),"No city found!",Toast.LENGTH_LONG).show();
         }
 

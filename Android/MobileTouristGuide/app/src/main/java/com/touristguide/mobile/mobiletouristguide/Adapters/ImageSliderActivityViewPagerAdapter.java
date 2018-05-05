@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.squareup.picasso.Picasso;
 import com.touristguide.mobile.mobiletouristguide.R;
@@ -45,8 +46,10 @@ public class ImageSliderActivityViewPagerAdapter extends PagerAdapter {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.image_slider_image_view_layout, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.ImageSliderLayoutImageView);
+        PhotoView imageView = view.findViewById(R.id.ImageSliderLayoutImageView);
         //imageView.setImageResource(images[position]);
+        //PhotoView photoView = (PhotoView) view.findViewById(R.id.ImageSliderLayoutImageView);
+        //photoView.setImageResource(R.drawable.image);
 
         String mediaUrl=images[position];
         if(mediaUrl!=null && !mediaUrl.isEmpty() && !mediaUrl.equals("null")){

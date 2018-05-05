@@ -1,7 +1,11 @@
 package com.touristguide.mobile.mobiletouristguide;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -12,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Models.PlannedTravels;
@@ -87,22 +92,27 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
                 tripName=tripNameEditText.getText().toString();
                 PlannedTravels plannedTravels=new PlannedTravels(user.getEmail(),tripStartingDate,tripFinishingDate,tripName,locationName,locationId);
 
-                try {
-                    ApiRequests.PUT("users/" + plannedTravels.getUserEmail(), new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Log.e("Succes:","basarisiz");
-                        }
+                if(isOnline()){
+                    try {
+                        ApiRequests.PUT("users/" + plannedTravels.getUserEmail(), new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                Log.e("Succes:","basarisiz");
+                            }
 
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            Log.e("Succes:","basarili");
-                            Intent intent = new Intent(CreateTripActivity.this, ProfileActivity.class);
-                            startActivity(intent);
-                        }
-                    },plannedTravels);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                Log.e("Succes:","basarili");
+                                Intent intent = new Intent(CreateTripActivity.this, ProfileActivity.class);
+                                startActivity(intent);
+                            }
+                        },plannedTravels);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    InternetConnectionError();
                 }
 
             }
@@ -165,8 +175,23 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         }
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+    public boolean isOnline(){
 
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+    private void InternetConnectionError(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getResources().getString(R.string.internet_connection_alert))
+                .setTitle(getResources().getString(R.string.internet_connection_alert_title));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

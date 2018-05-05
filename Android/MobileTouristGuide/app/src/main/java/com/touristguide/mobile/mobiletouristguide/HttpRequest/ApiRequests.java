@@ -77,8 +77,6 @@ public class ApiRequests
 
         OkHttpClient client = new OkHttpClient();
 
-        Log.e("apirequest: ",ServerUrl+queryString);
-        Log.e("json: ", json);
         RequestBody requestBody = RequestBody.create(JSON, json);
         Request request=new Request.Builder()
                 .url(ServerUrl+queryString)

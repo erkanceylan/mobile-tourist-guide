@@ -4,7 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -133,38 +137,37 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
             showProgress(true);
 
-            Log.e("doin: ","post istegi yapılıyor");
-            try {
-                ApiRequests.POST("login/", new Callback() {
-                    @Override
-                    public void onFailure(Call call, final IOException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.e("error:", "burda");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-
-                        try {
-                            processTheResponse(response.body().string());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            if(isOnline()){
+                try {
+                    ApiRequests.POST("login/", new Callback() {
+                        @Override
+                        public void onFailure(Call call, final IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.e("error:", "burda");
+                                }
+                            });
                         }
 
-                    }
-                }, email, password);
-            } catch (Exception e) {
-                e.printStackTrace();
+                        @Override
+                        public void onResponse(Call call, final Response response) throws IOException {
+
+                            try {
+                                processTheResponse(response.body().string());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }, email, password);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-
-
-                 //   Intent intent = new Intent(LoginActivity.this, ExploreActivity.class);
-                 //   startActivity(intent);
-
+            else {
+                InternetConnectionError();
+            }
         }
     }
 
@@ -243,6 +246,27 @@ public class LoginActivity extends AppCompatActivity {
                 mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
+    }
+
+    public boolean isOnline(){
+
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void InternetConnectionError(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getResources().getString(R.string.internet_connection_alert))
+                .setTitle(getResources().getString(R.string.internet_connection_alert_title));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
 

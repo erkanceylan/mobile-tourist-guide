@@ -74,9 +74,6 @@ public class CityActivity extends Activity {
                 intent.putExtra("locationName",cityObject.getName());
                 intent.putExtra("locationId",cityObject.getCityId());
                 startActivity(intent);
-
-                //Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
             }
         });
     }
@@ -115,17 +112,9 @@ public class CityActivity extends Activity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-
-
         /* istek bitişi */
+    }
 
-    }
-    public boolean isOnline(){
-        ConnectivityManager cm =(ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        boolean connection=netInfo != null && netInfo.isConnectedOrConnecting();
-        return connection;
-    }
     private void fillTheCityData(final String response) throws JSONException {
         //cityObject nesnesini oluştur ve ata.
         runOnUiThread(new Runnable() {
@@ -180,18 +169,31 @@ public class CityActivity extends Activity {
             }
         }
         else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage(getResources().getString(R.string.internet_connection_alert))
-                    .setTitle(getResources().getString(R.string.internet_connection_alert_title));
-            // 3. Get the AlertDialog from create()
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            InternetConnectionError();
         }
 
         /* istek bitişi */
 
+    }
+    public boolean isOnline(){
+
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void InternetConnectionError(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getResources().getString(R.string.internet_connection_alert))
+                .setTitle(getResources().getString(R.string.internet_connection_alert_title));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     private void fillThePlaces(String response){
         final ArrayList<String> placesJsonList;

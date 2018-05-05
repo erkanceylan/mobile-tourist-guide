@@ -2,14 +2,18 @@ package com.touristguide.mobile.mobiletouristguide;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
 import com.touristguide.mobile.mobiletouristguide.Utils.SharedPreferencesUtils;
@@ -76,19 +81,6 @@ public class SignupActivity extends AppCompatActivity {
             PreferenceManager.getDefaultSharedPreferences(this).edit().putString("userPhotoPath", filePath).apply();
             cursor.close();
 
-
-            //String path = Environment.getExternalStorageDirectory()+ filePath;
-            //File imgFile = new File(path);
-            /*
-            if(imgFile.exists()){
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                ImageView imageView=(ImageView)findViewById(R.id.imageView);
-                imageView.setImageBitmap(myBitmap);
-            }
-            */
-
-
-
             File imgFile = new  File(filePath);
 
             if(imgFile.exists()){
@@ -101,21 +93,6 @@ public class SignupActivity extends AppCompatActivity {
             else{
                 Log.e("exist","false");
             }
-//            imageView.setImageBitmap(BitmapFactory.decodeFile(filePath));
-
-/*
-            try {
-               // Bitmap bitmap;
-               // bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-               // imageView.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            */
         }
     }
 
@@ -145,29 +122,34 @@ public class SignupActivity extends AppCompatActivity {
                 final String password=userPassword;
                 final String photoUrl=userFilePath;
                 final String name=editText.getText().toString();
-                //TODO: Fotograf uygulamaya kaydedilecek ve ordaki linki kaydedilecek
-                try {
-                    ApiRequests.POST("users/", new Callback() {
-                        @Override
-                        public void onFailure(Call call, final IOException e) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Log.e("error:", "burda patladi");
-                                }
-                            });
-                        }
+                if(isOnline()){
+                    try {
+                        ApiRequests.POST("users/", new Callback() {
+                            @Override
+                            public void onFailure(Call call, final IOException e) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Log.e("error:", "burda patladi");
+                                    }
+                                });
+                            }
 
-                        @Override
-                        public void onResponse(Call call, final Response response) throws IOException {
-                            SharedPreferencesUtils.SaveUser(getApplicationContext(),name,email,password,photoUrl);
-                            Intent intent=new Intent(SignupActivity.this, ExploreActivity.class);
-                            startActivity(intent);
-                        }
-                    }, name, email, password);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                            @Override
+                            public void onResponse(Call call, final Response response) throws IOException {
+                                SharedPreferencesUtils.SaveUser(getApplicationContext(),name,email,password,photoUrl);
+                                Intent intent=new Intent(SignupActivity.this, ExploreActivity.class);
+                                startActivity(intent);
+                            }
+                        }, name, email, password);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+                else{
+                    InternetConnectionError();
+                }
+
             }
         });
         editText.addTextChangedListener(new TextWatcher() {
@@ -190,5 +172,26 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public boolean isOnline(){
+
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void InternetConnectionError(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getResources().getString(R.string.internet_connection_alert))
+                .setTitle(getResources().getString(R.string.internet_connection_alert_title));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

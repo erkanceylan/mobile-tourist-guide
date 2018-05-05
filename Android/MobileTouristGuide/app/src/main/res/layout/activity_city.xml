@@ -47,7 +47,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Country Name"
+                    android:text="@string/country_name"
+                    android:textColor="#00897b"
+                    android:textStyle="bold"
                     android:textSize="18sp" />
 
                 <TextView
@@ -78,7 +80,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Places"
+                    android:text="@string/places"
+                    android:textColor="#00897b"
+                    android:textStyle="bold"
                     android:textSize="18sp" />
 
                 <ProgressBar

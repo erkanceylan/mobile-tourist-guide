@@ -2,23 +2,39 @@ package com.touristguide.mobile.mobiletouristguide;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.touristguide.mobile.mobiletouristguide.Adapters.CountryActivityCityListAdapter;
 import com.touristguide.mobile.mobiletouristguide.Adapters.ProfileActivityPlannedTravelsListAdapter;
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
@@ -40,13 +56,14 @@ import okhttp3.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView nameTextView;
     private ImageView photoImageView;
     private User user;
     private ListView plannedTravelsListView;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private LinearLayout layout1;
+    private LinearLayout layout2;
+    private Button exploreCitiesButton;
 
-
-    private ArrayList<PlannedTravels> plannedTravels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +72,6 @@ public class ProfileActivity extends AppCompatActivity {
         fillProfileActivityWithUserData();
 
         //TODO: Planned travels getirilecek.
-        plannedTravels=new ArrayList<PlannedTravels>();
         /* istek yapılıyor */
         if(isOnline()){
             try {
@@ -77,42 +93,54 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
         else{
-            Log.d("*********","THERE IS NO INTERNET CONNECTION");
-            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-
-            // 2. Chain together various setter methods to set the dialog characteristics
-            builder.setMessage(getResources().getString(R.string.internet_connection_alert))
-                    .setTitle(getResources().getString(R.string.internet_connection_alert_title));
-            // 3. Get the AlertDialog from create()
-            AlertDialog dialog = builder.create();
-            dialog.show();
+            InternetConnectionError();
         }
-
-
         /* istek bitişi */
-
-
-
     }
 
     public boolean isOnline(){
-        ConnectivityManager cm =(ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        boolean connection=netInfo != null && netInfo.isConnectedOrConnecting();
-        return connection;
+
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(getApplicationContext(), "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void InternetConnectionError(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getResources().getString(R.string.internet_connection_alert))
+                .setTitle(getResources().getString(R.string.internet_connection_alert_title));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void init(){
-        nameTextView=findViewById(R.id.ProfileActivityNameTextView);
         photoImageView=findViewById(R.id.ProfileActivityImageView);
         plannedTravelsListView=findViewById(R.id.ProfileActivityPlannedTravelsListView);
+        collapsingToolbar=findViewById(R.id.ProfileActivityCollapsingToolbar);
+        layout1=findViewById(R.id.ProfileActivityLayout1);
+        layout2=findViewById(R.id.ProfileActivityLayout2);
+        exploreCitiesButton=findViewById(R.id.ProfileActivityExploreCitiesButton);
+
+        exploreCitiesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, CitiesActivity.class);
+                startActivity(intent);
+            }
+        });
 
         user= SharedPreferencesUtils.GetUser(getApplicationContext());
     }
 
     private void fillProfileActivityWithUserData(){
-        nameTextView.setText(user.getName());
-        //TODO: Foto ayarlanacak.
+
+        collapsingToolbar.setTitle(user.getName());
 
         if(!user.getPhoto().equals("DEFAULT"))
         {
@@ -126,8 +154,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void fillPlannedTravels(String response){
-        //TODO: fill planned travels
         final ArrayList<PlannedTravels> plannedTravels= JsonToObject.GetPlannedTravelsFromJson(response);
+
+        getOnlyNowTravels(plannedTravels);
 
         if(plannedTravels.size()>0){
 
@@ -136,6 +165,8 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void run()
                 {
+                    layout1.setVisibility(View.VISIBLE);
+                    layout2.setVisibility(View.INVISIBLE);
                     plannedTravelsListView.setAdapter(adapter);
                     ListUtils.setDynamicHeight(plannedTravelsListView);
                     plannedTravelsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,10 +193,23 @@ public class ProfileActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(),"No trip plan found!",Toast.LENGTH_SHORT).show();
+                    layout1.setVisibility(View.INVISIBLE);
+                    layout2.setVisibility(View.VISIBLE);
                 }
             });
+        }
+    }
 
+    private void getOnlyNowTravels(ArrayList<PlannedTravels> travels){
+
+        Calendar now = Calendar.getInstance();
+        now.set(Calendar.HOUR_OF_DAY,0);
+        PlannedTravels x;
+        for (int i=0; i<travels.size();i++){
+            x=travels.get(i);
+            if(x.getFinishingDate().compareTo(now)==1){
+                travels.remove(x);
+            }
         }
     }
 

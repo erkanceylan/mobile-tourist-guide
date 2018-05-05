@@ -61,8 +61,8 @@ public class PlannedTravels {
 
     public PlannedTravels(String userEmail, Calendar startingDate, Calendar finishingDate, String tripName, String locationName, String cityOrCountryId) {
         this.userEmail = userEmail;
-        this.startingDate = startingDate;
-        this.finishingDate = finishingDate;
+        this.startingDate = (Calendar) startingDate.clone();
+        this.finishingDate = (Calendar) finishingDate.clone();
         this.tripName = tripName;
         this.locationName=locationName;
         this.cityOrCountryId = cityOrCountryId;

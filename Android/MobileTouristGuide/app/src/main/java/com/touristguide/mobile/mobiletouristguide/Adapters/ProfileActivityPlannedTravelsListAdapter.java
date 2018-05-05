@@ -26,9 +26,14 @@ public class ProfileActivityPlannedTravelsListAdapter extends ArrayAdapter<Plann
     Context context;
     int resource;
     int tvResourceId;
+
+    private SimpleDateFormat dateFormatter;
+
+
     public ProfileActivityPlannedTravelsListAdapter(Context context, int resource, int textViewResourceId, ArrayList<PlannedTravels> objects) {
         super(context, resource, textViewResourceId, objects);
 
+        dateFormatter = new SimpleDateFormat("MMMM d, yyyy");
         Log.e("objects size: ",String.valueOf(objects.size()));
         this.tvResourceId=textViewResourceId;
         this.plannedTravels=objects;
@@ -43,16 +48,13 @@ public class ProfileActivityPlannedTravelsListAdapter extends ArrayAdapter<Plann
             convertView=inflater.inflate(R.layout.profile_activity_planned_travels_list_layout,null,true);
         }
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM d, yyyy");
-
-        PlannedTravels thisPlannedTravel=getItem(position);
-
         TextView cityName=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripCityName);
         TextView startingDate=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripStartingDate);
         TextView finishingDate=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripFinishingDate);
 
-        cityName.setText(thisPlannedTravel.getLocationName());
+        PlannedTravels thisPlannedTravel=getItem(position);
 
+        cityName.setText(thisPlannedTravel.getLocationName());
         startingDate.setText(dateFormatter.format(thisPlannedTravel.getStartingDate().getTime()));
         finishingDate.setText(dateFormatter.format(thisPlannedTravel.getFinishingDate().getTime()));
         return super.getView(position,convertView,parent);

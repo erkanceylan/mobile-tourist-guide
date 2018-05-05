@@ -132,7 +132,7 @@ public class JsonToObject {
                 startingDate.setTime(sdf.parse(tripObject.getString("tripStartingDate")));
                 finishingDate.setTime(sdf.parse(tripObject.getString("tripFinishingDate")));
 
-                Log.e("Planned Travel: ",tripName+" - "+locationId);
+                Log.e("Planned Travel: ",tripName+" - "+locationId+"-"+tripObject.getString("tripStartingDate")+"-"+tripObject.getString("tripFinishingDate"));
                 plannedTravels.add(new PlannedTravels(userEmail, startingDate, finishingDate, tripName, locationName, locationId));
             }
         }

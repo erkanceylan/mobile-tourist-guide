@@ -83,13 +83,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Capital"
-                        android:textSize="18sp"/>
+                        android:text="@string/capital"
+                        android:textColor="#00897b"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                     <TextView
                         android:id="@+id/txtCountryActivityCapitalCity"
                         android:layout_width="match_parent"
@@ -116,7 +119,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:gravity="center_horizontal"
-                    android:text="Population"
+                    android:text="@string/population"
+                    android:textColor="#00897b"
+                    android:textStyle="bold"
                     android:textSize="18sp"/>
                 <TextView
                     android:id="@+id/txtCountryActivityPopulation"
@@ -146,7 +151,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Cities"
+                        android:text="@string/cities"
+                        android:textColor="#00897b"
+                        android:textStyle="bold"
                         android:textSize="18sp"/>
                     <ListView
                         android:id="@+id/listViewCountryActivityCities"
