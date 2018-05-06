@@ -20,7 +20,7 @@ public class ListUtils {
             height += listItem.getMeasuredHeight();
         }
         ViewGroup.LayoutParams params = mListView.getLayoutParams();
-        params.height = height + (mListView.getDividerHeight() * (mListAdapter.getCount() - 1));
+        params.height = height + (mListView.getDividerHeight() * (mListAdapter.getCount()));
         mListView.setLayoutParams(params);
         mListView.requestLayout();
     }

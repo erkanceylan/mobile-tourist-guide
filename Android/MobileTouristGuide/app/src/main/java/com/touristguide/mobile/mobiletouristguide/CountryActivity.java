@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
@@ -59,7 +60,8 @@ public class CountryActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView toolbarImageView;
     private FloatingActionButton fab;
-
+    private Toolbar toolbar;
+    
     private String countryName;
 
     @Override
@@ -78,6 +80,18 @@ public class CountryActivity extends AppCompatActivity {
 
         collapsingToolbar=findViewById(R.id.CountryActivityCollapsingToolbar);
         toolbarImageView=findViewById(R.id.CountryActivityImageView);
+
+        toolbar = findViewById(R.id.CountryActivityToolbarId);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(CountryActivity.this,ExploreActivity.class);
+                startActivity(intent);
+            }
+        });
 
         fab = findViewById(R.id.CountryActivityFloatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -105,9 +119,7 @@ public class CountryActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
-
                         fillTheCountryData(response.body().string());
-
                     }
                 });
             } catch (Exception e) {

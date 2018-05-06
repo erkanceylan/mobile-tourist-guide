@@ -244,7 +244,6 @@ public class CitiesActivity extends AppCompatActivity  {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("visible","true");
                     view.setVisibility(View.VISIBLE);
                 }
             });

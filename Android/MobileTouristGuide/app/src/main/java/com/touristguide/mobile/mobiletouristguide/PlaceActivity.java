@@ -20,26 +20,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 import com.touristguide.mobile.mobiletouristguide.Models.Place;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class PlaceActivity extends AppCompatActivity {
 
@@ -51,6 +37,7 @@ public class PlaceActivity extends AppCompatActivity {
     private ImageView toolbarImageView;
     private LinearLayout categoryLinearLayout;
     private Button showInMapButton;
+    private Toolbar toolbar;
 
     private Place thisPlaceObject;
     private String placeJson;
@@ -156,6 +143,18 @@ public class PlaceActivity extends AppCompatActivity {
         toolbarImageView=findViewById(R.id.PlaceActivityImageView);
         categoryLinearLayout=findViewById(R.id.linearLayoutPlaceActivityCategories);
         showInMapButton=findViewById(R.id.PlaceActivityShowInMapButton);
+
+        toolbar = findViewById(R.id.PlaceActivityToolbarId);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                onBackPressed();
+            }
+        });
     }
 
 }

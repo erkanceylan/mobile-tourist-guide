@@ -1,6 +1,7 @@
 package com.touristguide.mobile.mobiletouristguide.Adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
@@ -47,14 +49,16 @@ public class ImageSliderActivityViewPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.image_slider_image_view_layout, null);
         PhotoView imageView = view.findViewById(R.id.ImageSliderLayoutImageView);
-        //imageView.setImageResource(images[position]);
-        //PhotoView photoView = (PhotoView) view.findViewById(R.id.ImageSliderLayoutImageView);
-        //photoView.setImageResource(R.drawable.image);
+
+        VideoView videoView = view.findViewById(R.id.ImageSliderLayoutVideoView);
 
         String mediaUrl=images[position];
         if(mediaUrl!=null && !mediaUrl.isEmpty() && !mediaUrl.equals("null")){
 
-            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+            if(mediaUrl.split(".")[1].equals(".mp4")){
+                videoView.setVideoURI(mediaUrl);
+            }
+            int SDK_INT = Build.VERSION.SDK_INT;
             if (SDK_INT > 8)
             {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()

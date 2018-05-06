@@ -7,7 +7,7 @@ Sakarya Üniversitesi, Bilgisayar Mühendisliği Bölümü, Bitirme Ödevi
 
 Uygulama android ve server tarafı olmak üzere iki aşamadan oluşacaktır.
 
-Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'dan, android uygulamanın yüklü olduğu akıllı telefona yüklenecektir.
+Server kısmında MongoDB'de tutulan veriler, Node JS ile oluşturulan API'dan, android uygulamanın yüklü olduğu akıllı telefona yüklenecektir.
 
 ### To-Do List
 
@@ -26,6 +26,15 @@ Server kısmında MongoDB'de tutulan veriler, Node JS yoluyla oluşturulan API'd
 - [x] Android uygulamanın arayüzleri oluşturulmaya başlanacak.
 - [x] Android uygulamada model sınıfları tanımlanacak.
 - [x] Android uygulamada Web Api'den asenkron veri çekme kütüphanesi yazılacak.
+- [x] Android uygulama tamamlanacak.
+- [x] Google Play Store için tanıtım görselleri hazırlanacak.
+- [x] Android markette yayınlanacak.
+- [x] Bitirme sergisi için poster hazırlanacak.
+- [x] Bitirme dökümanları hazırlanacak.
+
+### Google Play Store Linki
+
+[İndirmek için tıklayınız](https://play.google.com/apps/testing/com.touristguide.mobile.mobiletouristguide)
 
 
 We are building this app with :heart:

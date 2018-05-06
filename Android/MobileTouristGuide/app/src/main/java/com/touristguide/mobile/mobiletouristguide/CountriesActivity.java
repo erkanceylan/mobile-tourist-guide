@@ -71,7 +71,7 @@ public class CountriesActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String searchingText=searchEditText.getText().toString();
-                if(searchingText!="" && searchingText!=null && !searchingText.isEmpty()){
+                if(searchingCountries.size()>0 && searchingText!="" && searchingText!=null && !searchingText.isEmpty()){
                     //Array içinde arama yap, searching array a at onu göster.
                     Search(searchingText);
                 }

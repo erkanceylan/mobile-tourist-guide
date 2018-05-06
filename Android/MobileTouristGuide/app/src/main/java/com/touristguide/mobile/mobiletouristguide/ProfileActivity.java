@@ -21,24 +21,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.touristguide.mobile.mobiletouristguide.Adapters.CountryActivityCityListAdapter;
+import android.support.v7.widget.Toolbar;
 import com.touristguide.mobile.mobiletouristguide.Adapters.ProfileActivityPlannedTravelsListAdapter;
 import com.touristguide.mobile.mobiletouristguide.HttpRequest.ApiRequests;
-import com.touristguide.mobile.mobiletouristguide.Models.City;
 import com.touristguide.mobile.mobiletouristguide.Models.PlannedTravels;
 import com.touristguide.mobile.mobiletouristguide.Models.User;
 import com.touristguide.mobile.mobiletouristguide.Utils.JsonToObject;
@@ -63,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout layout1;
     private LinearLayout layout2;
     private Button exploreCitiesButton;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +58,6 @@ public class ProfileActivity extends AppCompatActivity {
         init();
         fillProfileActivityWithUserData();
 
-        //TODO: Planned travels getirilecek.
         /* istek yapılıyor */
         if(isOnline()){
             try {
@@ -135,9 +121,27 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        toolbar = findViewById(R.id.ProfileActivityToolbarId);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToExploreActivity();
+            }
+        });
+
         user= SharedPreferencesUtils.GetUser(getApplicationContext());
     }
-
+    @Override
+    public void onBackPressed() {
+        goToExploreActivity();
+    }
+    private void goToExploreActivity(){
+        Intent intent=new Intent(ProfileActivity.this, ExploreActivity.class);
+        startActivity(intent);
+    }
     private void fillProfileActivityWithUserData(){
 
         collapsingToolbar.setTitle(user.getName());
@@ -207,7 +211,7 @@ public class ProfileActivity extends AppCompatActivity {
         PlannedTravels x;
         for (int i=0; i<travels.size();i++){
             x=travels.get(i);
-            if(x.getFinishingDate().compareTo(now)==1){
+            if(x.getFinishingDate().compareTo(now) > 0){
                 travels.remove(x);
             }
         }
