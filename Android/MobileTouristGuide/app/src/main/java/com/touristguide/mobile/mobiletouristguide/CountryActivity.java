@@ -88,8 +88,6 @@ public class CountryActivity extends AppCompatActivity {
                 intent.putExtra("locationId",thisCountryObject.getCountryId());
                 startActivity(intent);
 
-                //Snackbar.make(view, "Burada tarih seçme ekranı açılacak", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
             }
         });
 

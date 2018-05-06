@@ -106,10 +106,10 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (EasyPermissions.hasPermissions(getApplicationContext(), galleryPermissions)) {
+                if (EasyPermissions.hasPermissions(SignupActivity.this, galleryPermissions)) {
                     startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
                 } else {
-                    EasyPermissions.requestPermissions(this, "Access for storage",
+                    EasyPermissions.requestPermissions(SignupActivity.this, "Access for storage",
                             101, galleryPermissions);
                 }
             }
