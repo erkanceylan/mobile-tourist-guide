@@ -1,6 +1,7 @@
 package com.touristguide.mobile.mobiletouristguide.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.v4.view.PagerAdapter;
@@ -53,43 +54,36 @@ public class ImageSliderActivityViewPagerAdapter extends PagerAdapter {
         VideoView videoView = view.findViewById(R.id.ImageSliderLayoutVideoView);
 
         String mediaUrl=images[position];
+        Log.e(": ",mediaUrl);
         if(mediaUrl!=null && !mediaUrl.isEmpty() && !mediaUrl.equals("null")){
-
-            if(mediaUrl.split(".")[1].equals(".mp4")){
-                videoView.setVideoURI(mediaUrl);
+            String extension=mediaUrl.substring(mediaUrl.length()-4);
+            Log.e(": ",extension);
+            if(extension.equals(".mp4")){
+                videoView.setVisibility(View.VISIBLE);
+                Uri uri= Uri.parse(mediaUrl);
+                videoView.setVideoURI(uri);
+                videoView.start();
             }
-            int SDK_INT = Build.VERSION.SDK_INT;
-            if (SDK_INT > 8)
-            {
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                        .permitAll().build();
-                StrictMode.setThreadPolicy(policy);
+            else{
+                imageView.setVisibility(View.VISIBLE);
+                int SDK_INT = Build.VERSION.SDK_INT;
+                if (SDK_INT > 8)
+                {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
 
-                PhotoViewAttacher yourAttacher = new PhotoViewAttacher(imageView);
+                    PhotoViewAttacher yourAttacher = new PhotoViewAttacher(imageView);
 
-                Picasso.with(this.context)
-                        .load(mediaUrl)
-                        .placeholder(R.drawable.image_loading)
-                        .error(R.drawable.no_image)
-                        .into(imageView);
-            }
-        }
-
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(position == 0){
-                    Toast.makeText(context, "Slide 1 Clicked", Toast.LENGTH_SHORT).show();
-                } else if(position == 1){
-                    Toast.makeText(context, "Slide 2 Clicked", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Slide 3 Clicked", Toast.LENGTH_SHORT).show();
+                    Picasso.with(this.context)
+                            .load(mediaUrl)
+                            .placeholder(R.drawable.image_loading)
+                            .error(R.drawable.no_image)
+                            .into(imageView);
                 }
-
             }
-        });
+
+        }
 
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);
