@@ -36,5 +36,7 @@ Server kısmında MongoDB'de tutulan veriler, Node JS ile oluşturulan API'dan, 
 
 [İndirmek için tıklayınız](https://play.google.com/apps/testing/com.touristguide.mobile.mobiletouristguide)
 
+!["Play Store Image"](https://github.com/erkanceylan/final-project/blob/master/assets/play_store.png)
+
 
 We are building this app with :heart:
