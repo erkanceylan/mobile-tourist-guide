@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 import com.touristguide.mobile.mobiletouristguide.Adapters.ProfileActivityPlannedTravelsListAdapter;
@@ -50,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout layout2;
     private Button exploreCitiesButton;
     private Toolbar toolbar;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +114,8 @@ public class ProfileActivity extends AppCompatActivity {
         layout1=findViewById(R.id.ProfileActivityLayout1);
         layout2=findViewById(R.id.ProfileActivityLayout2);
         exploreCitiesButton=findViewById(R.id.ProfileActivityExploreCitiesButton);
-
+        progressBar=findViewById(R.id.progressBarProfileActivity);
+        progressBar.setVisibility(View.VISIBLE);
         exploreCitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +161,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void fillPlannedTravels(String response){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+
         final ArrayList<PlannedTravels> plannedTravels= JsonToObject.GetPlannedTravelsFromJson(response);
 
         getOnlyNowTravels(plannedTravels);
@@ -205,16 +215,23 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getOnlyNowTravels(ArrayList<PlannedTravels> travels){
-
+        ArrayList<PlannedTravels> newTravels=new ArrayList<>();
         Calendar now = Calendar.getInstance();
         now.set(Calendar.HOUR_OF_DAY,0);
         PlannedTravels x;
         for (int i=0; i<travels.size();i++){
             x=travels.get(i);
             if(x.getFinishingDate().compareTo(now) > 0){
-                travels.remove(x);
+                newTravels.add(x);
+                //travels.remove(x);
             }
         }
+
+        travels.clear();
+        for (int i=0; i<newTravels.size();i++){
+            travels.add(newTravels.get(i));
+        }
+
     }
 
 }

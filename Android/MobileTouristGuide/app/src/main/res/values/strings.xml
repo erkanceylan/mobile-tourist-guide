@@ -32,4 +32,5 @@
     <string name="capital">CAPITAL</string>
     <string name="population">POPULATION</string>
     <string name="cities">CITIES</string>
+    <string name="editor_s_pick">Editor\'s Pick</string>
 </resources>

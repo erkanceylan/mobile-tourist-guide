@@ -51,13 +51,14 @@ public class ProfileActivityPlannedTravelsListAdapter extends ArrayAdapter<Plann
         TextView cityName=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripCityName);
         TextView startingDate=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripStartingDate);
         TextView finishingDate=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripFinishingDate);
+        TextView tripName=convertView.findViewById(R.id.profile_activity_planned_travel_list_layout_txtTripName);
 
         PlannedTravels thisPlannedTravel=getItem(position);
 
+        tripName.setText(thisPlannedTravel.getTripName());
         cityName.setText(thisPlannedTravel.getLocationName());
         startingDate.setText(dateFormatter.format(thisPlannedTravel.getStartingDate().getTime()));
         finishingDate.setText(dateFormatter.format(thisPlannedTravel.getFinishingDate().getTime()));
         return super.getView(position,convertView,parent);
-
     }
 }

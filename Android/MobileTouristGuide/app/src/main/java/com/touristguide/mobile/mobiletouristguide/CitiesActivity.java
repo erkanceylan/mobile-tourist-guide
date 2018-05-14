@@ -107,11 +107,9 @@ public class CitiesActivity extends AppCompatActivity  {
 
                                     try {
                                         fillTheCities(response.body().string(),searchingCityListView);
-                                        //responseView.setText(response.body().string());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
-
                                 }
                             });
                         } catch (Exception e) {
@@ -124,12 +122,8 @@ public class CitiesActivity extends AppCompatActivity  {
                 }
                 else{
                     //Öneri ekranını göster.
-
                     getSuggestionCities();
                 }
-
-
-
                 /* istek bitişi */
 
             }
@@ -140,7 +134,6 @@ public class CitiesActivity extends AppCompatActivity  {
 
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                //searchText.getText().clear();
             }
         });
 
@@ -187,8 +180,6 @@ public class CitiesActivity extends AppCompatActivity  {
                             layout1.getLayoutParams().height = pixels;
                             layout2.getLayoutParams().height=RelativeLayout.LayoutParams.MATCH_PARENT;
                             fillTheTopCities(response.body().string(),topCityListView);
-
-                            //responseView.setText(response.body().string());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -206,9 +197,7 @@ public class CitiesActivity extends AppCompatActivity  {
                     public void onResponse(Call call, final Response response) throws IOException {
 
                         try {
-                            //progressBar.setVisibility(View.INVISIBLE);
                             fillTheEditorsPickCities(response.body().string(),editorsPickCityListView);
-                            //responseView.setText(response.body().string());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -260,8 +249,7 @@ public class CitiesActivity extends AppCompatActivity  {
     private void fillTheCities(String response, final ListView cityListView){
 
         cityList=null;
-        String responseJson=response;
-        cityList = JsonToObject.GetCitiesFromJson(responseJson);
+        cityList = JsonToObject.GetCitiesFromJson(response);
         if(cityList.size()!=0){
             final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.cities_activity_top_cities_layout,R.id.explore_activity_top_cities_layout_lanetTextView, cityList);
             runOnUiThread(new Runnable() {
@@ -301,9 +289,7 @@ public class CitiesActivity extends AppCompatActivity  {
     private void fillTheTopCities(String response, final ListView cityListView){
 
         topCitiesList=null;
-
-        String responseJson=response;
-        topCitiesList = JsonToObject.GetCitiesFromJson(responseJson);
+        topCitiesList = JsonToObject.GetCitiesFromJson(response);
         if(topCitiesList.size()!=0){
             final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.cities_activity_top_cities_layout,R.id.explore_activity_top_cities_layout_lanetTextView, topCitiesList);
             runOnUiThread(new Runnable() {
@@ -330,9 +316,7 @@ public class CitiesActivity extends AppCompatActivity  {
     private void fillTheEditorsPickCities(String response, final ListView cityListView){
 
         edistorsPickList=null;
-
-        String responseJson=response;
-        edistorsPickList = JsonToObject.GetCitiesFromJson(responseJson);
+        edistorsPickList = JsonToObject.GetCitiesFromJson(response);
         if(edistorsPickList.size()!=0){
             final ExplorerActivityCityListAdapter adapter=new ExplorerActivityCityListAdapter(this,R.layout.cities_activity_editors_pick_layout,R.id.explore_activity_editors_pick_layout_lanetTextView, edistorsPickList);
             runOnUiThread(new Runnable() {

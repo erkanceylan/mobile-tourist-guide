@@ -23,6 +23,8 @@
             app:expandedTitleMarginEnd="20dp"
             app:expandedTitleMarginBottom="20dp"
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+
             <android.support.v7.widget.CardView
                 android:layout_width="160dp"
                 android:layout_height="160dp"
@@ -69,6 +71,15 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progressBarProfileActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:indeterminate="false"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/ProfileActivityLayout1"

@@ -66,7 +66,7 @@
                 android:id="@+id/CountryActivityCardViewCountryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
                 <TextView
                     android:id="@+id/txtCountryActivityCountryName"
                     android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                 android:id="@+id/CountryActivityCardViewCapitalCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -112,7 +112,7 @@
                 android:id="@+id/CountryActivityCardViewPopulation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -142,7 +142,7 @@
                 android:id="@+id/CountryActivityCardViewCities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

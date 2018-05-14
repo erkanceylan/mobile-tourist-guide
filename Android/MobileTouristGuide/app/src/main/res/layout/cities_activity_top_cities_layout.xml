@@ -12,7 +12,7 @@
         android:id="@+id/explore_activity_top_cities_layout_lanetTextView"/>
 
     <TextView
-        android:padding="20dp"
+        android:padding="12dp"
         android:id="@+id/explore_activity_city_list_layout_txtCityName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,13 +21,13 @@
         android:textSize="24sp" />
 
     <TextView
-        android:padding="20dp"
+        android:padding="12dp"
         android:id="@+id/explore_activity_city_list_layout_txtCountryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="United States of America"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="#818181"/>
 
 </LinearLayout>

@@ -71,7 +71,7 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
         startingDateTextView = findViewById(R.id.CreateTripActivityStartingDateTextView);
         finishingDateTextView = findViewById(R.id.CreateTripActivityFinishingDateTextView);
         createButton = findViewById(R.id.CreateTripActivityButton);
-
+        createButton.setEnabled(true);
         startingDateTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +91,7 @@ public class CreateTripActivity extends AppCompatActivity implements DatePickerD
             public void onClick(View v) {
                 tripName=tripNameEditText.getText().toString();
                 PlannedTravels plannedTravels=new PlannedTravels(user.getEmail(),tripStartingDate,tripFinishingDate,tripName,locationName,locationId);
-
+                createButton.setEnabled(false);
                 if(isOnline()){
                     try {
                         ApiRequests.PUT("users/" + plannedTravels.getUserEmail(), new Callback() {

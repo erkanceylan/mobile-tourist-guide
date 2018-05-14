@@ -13,16 +13,26 @@
             android:visibility="invisible"
             android:id="@+id/profile_activity_planned_travel_list_layout_lanetTextView"/>
 
+
         <TextView
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:padding="5dp"
             android:id="@+id/profile_activity_planned_travel_list_layout_txtTripCityName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New York"
             android:textColor="#212121"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:id="@+id/profile_activity_planned_travel_list_layout_txtTripName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trip To New York"
+            android:textColor="#d50000"
+            android:textSize="16sp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -30,21 +40,21 @@
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:id="@+id/profile_activity_planned_travel_list_layout_txtTripStartingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10 May, 18"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
             <TextView
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:id="@+id/profile_activity_planned_travel_list_layout_txtTripFinishingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="14 May, 18"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>
